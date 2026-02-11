@@ -3,6 +3,7 @@ import './LayerToggle.css'
 const layers = [
   { id: 'jesus', label: 'Journeys of Jesus', icon: '✝' },
   { id: 'marian', label: 'Marian Apparitions', icon: '✦' },
+  { id: 'mass', label: 'The Holy Mass', icon: '☧' },
 ]
 
 function LayerToggle({ activeLayer, onLayerChange }) {

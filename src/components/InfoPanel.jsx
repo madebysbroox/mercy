@@ -1,10 +1,33 @@
 import { categoryColors } from '../data/jesusLocations'
+import { massPartColors } from '../data/massData'
 import './InfoPanel.css'
 
 const MARIAN_ACCENT = '#6ba4c9'
 
 function InfoPanel({ location, layer, onClose }) {
   if (!location) return null
+
+  if (layer === 'mass') {
+    const accentColor = massPartColors[location.section] || '#c4a35a'
+    return (
+      <div className="info-panel">
+        <button className="info-panel-close" onClick={onClose} aria-label="Close">
+          &times;
+        </button>
+        <div className="info-panel-accent" style={{ backgroundColor: accentColor }} />
+        <p className="info-panel-period">
+          <span className="info-panel-section-badge" style={{ borderColor: accentColor, color: accentColor }}>
+            {location.sectionLabel}
+          </span>
+          {' '}{location.origin} &middot; {location.century}
+        </p>
+        <h2 className="info-panel-title">{location.name}</h2>
+        <p className="info-panel-description">{location.description}</p>
+        <p className="info-panel-liturgical">{location.liturgicalText}</p>
+        <p className="info-panel-scripture">{location.scripture}</p>
+      </div>
+    )
+  }
 
   if (layer === 'marian') {
     return (
