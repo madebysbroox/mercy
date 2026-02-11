@@ -83,3 +83,30 @@
   color: rgba(255, 255, 255, 0.35);
   margin: 0;
 }
+
+.info-panel-location-line {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  margin: -0.3rem 0 0.6rem;
+}
+
+.info-panel-meta {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.6rem;
+}
+
+.info-panel-visionary {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.2rem;
+}
+
+.info-panel-approval {
+  font-size: 0.75rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0;
+}
