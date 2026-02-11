@@ -4,6 +4,7 @@ const layers = [
   { id: 'jesus', label: 'Journeys of Jesus', icon: '✝' },
   { id: 'marian', label: 'Marian Apparitions', icon: '✦' },
   { id: 'mass', label: 'The Holy Mass', icon: '☧' },
+  { id: 'spread', label: 'Spread of Christianity', icon: '🌍' },
 ]
 
 function LayerToggle({ activeLayer, onLayerChange }) {
