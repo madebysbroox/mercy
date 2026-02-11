@@ -1,0 +1,85 @@
+.info-panel {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(420px, calc(100vw - 2rem));
+  background: rgba(14, 14, 22, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  animation: panel-in 0.3s ease-out;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.info-panel-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  transition: color 0.2s;
+}
+
+.info-panel-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.info-panel-accent {
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+}
+
+.info-panel-period {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 0 0.25rem;
+}
+
+.info-panel-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.info-panel-description {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.75rem;
+}
+
+.info-panel-scripture {
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
