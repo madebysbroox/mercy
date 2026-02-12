@@ -289,4 +289,27 @@ const apparitions = [
   },
 ]
 
-export { apparitions }
+// Arcs connecting apparitions in chronological order,
+// tracing devotion to the Blessed Mother across the centuries.
+function buildMarianArcs() {
+  const arcsOut = []
+  for (let i = 0; i < apparitions.length - 1; i++) {
+    const from = apparitions[i]
+    const to = apparitions[i + 1]
+    const dist = Math.abs(from.lat - to.lat) + Math.abs(from.lng - to.lng)
+    if (dist < 0.5) continue
+    arcsOut.push({
+      id: `ma-arc-${i}`,
+      startLat: from.lat,
+      startLng: from.lng,
+      endLat: to.lat,
+      endLng: to.lng,
+      order: i,
+    })
+  }
+  return arcsOut
+}
+
+const marianArcs = buildMarianArcs()
+
+export { apparitions, marianArcs }
