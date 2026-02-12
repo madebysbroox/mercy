@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { locations, arcs, categoryColors } from './data/jesusLocations'
-import { apparitions } from './data/marianApparitions'
+import { apparitions, marianArcs } from './data/marianApparitions'
 import { massParts, massArcs, massPartColors } from './data/massData'
 import { spreadEvents, spreadArcs, eraColors } from './data/spreadData'
 import InfoPanel from './components/InfoPanel'
@@ -37,6 +37,7 @@ function getPointColor(d, layer) {
 }
 
 function getArcColor(d, layer) {
+  if (layer === 'marian') return MARIAN_COLOR
   if (layer === 'mass') return massPartColors[d.section] || '#c4a35a'
   if (layer === 'spread') return eraColors[d.era] || '#c9a0dc'
   return 'rgba(201, 160, 220, 0.6)'
@@ -97,7 +98,7 @@ function App() {
 
   // Compute layer data
   const { pointsData, arcsData } = useMemo(() => {
-    if (activeLayer === 'marian') return { pointsData: apparitions, arcsData: [] }
+    if (activeLayer === 'marian') return { pointsData: apparitions, arcsData: marianArcs }
     if (activeLayer === 'mass') return { pointsData: massParts, arcsData: massArcs }
     if (activeLayer === 'spread') return { pointsData: spreadEvents, arcsData: spreadArcs }
     return { pointsData: locations, arcsData: arcs }
