@@ -43,7 +43,8 @@ function getArcColor(d, layer) {
   return 'rgba(201, 160, 220, 0.6)'
 }
 
-const TRAVELER_CYCLE_MS = 45000
+const TRAVELER_MIN_MS = 45000
+const TRAVELER_DEG_PER_SEC = 8
 
 function buildWaypoints(arcData) {
   if (!arcData.length) return []
@@ -402,12 +403,14 @@ function App() {
     if (waypoints.length < 2) return
 
     const cumDist = computeCumulativeDist(waypoints)
+    const totalDist = cumDist[cumDist.length - 1]
+    const cycleDuration = Math.max(TRAVELER_MIN_MS, (totalDist / TRAVELER_DEG_PER_SEC) * 1000)
     const color = getTravelerColor(activeLayer)
 
     let start = null
     function tick(ts) {
       if (!start) start = ts
-      const t = ((ts - start) % TRAVELER_CYCLE_MS) / TRAVELER_CYCLE_MS
+      const t = ((ts - start) % cycleDuration) / cycleDuration
       const pos = lerpOnPath(waypoints, cumDist, t)
       const src = map.getSource('traveler')
       if (src) {
