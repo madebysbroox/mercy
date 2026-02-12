@@ -1,5 +1,6 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
-import Globe from 'react-globe.gl'
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react'
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { locations, arcs, categoryColors } from './data/jesusLocations'
 import { apparitions } from './data/marianApparitions'
 import { massParts, massArcs, massPartColors } from './data/massData'
@@ -8,8 +9,7 @@ import InfoPanel from './components/InfoPanel'
 import LayerToggle from './components/LayerToggle'
 import './App.css'
 
-const GLOBE_IMAGE = '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
-const BUMP_IMAGE = '//unpkg.com/three-globe/example/img/earth-topology.png'
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 
 const MARIAN_COLOR = '#6ba4c9'
 
@@ -21,168 +21,389 @@ const SUBTITLES = {
 }
 
 const DEFAULT_VIEWS = {
-  jesus: { lat: 31.77, lng: 35.23, altitude: 1.8 },
-  marian: { lat: 30, lng: 10, altitude: 2.5 },
-  mass: { lat: 36, lng: 25, altitude: 1.6 },
-  spread: { lat: 20, lng: 20, altitude: 2.8 },
+  jesus: { center: [35.23, 31.77], zoom: 5.5 },
+  marian: { center: [10, 30], zoom: 1.5 },
+  mass: { center: [25, 36], zoom: 4 },
+  spread: { center: [20, 20], zoom: 1.2 },
 }
 
-const ATMOSPHERE_COLORS = {
-  jesus: '#3a5f8a',
-  marian: '#4a6e8a',
-  mass: '#5a4a3a',
-  spread: '#3a5a3a',
+const SELECTED_ZOOM = 8
+
+function getPointColor(d, layer) {
+  if (layer === 'marian') return MARIAN_COLOR
+  if (layer === 'mass') return massPartColors[d.section] || '#c4a35a'
+  if (layer === 'spread') return eraColors[d.era] || '#c9a0dc'
+  return categoryColors[d.category] || '#c9a0dc'
+}
+
+function getArcColor(d, layer) {
+  if (layer === 'mass') return massPartColors[d.section] || '#c4a35a'
+  if (layer === 'spread') return eraColors[d.era] || '#c9a0dc'
+  return 'rgba(201, 160, 220, 0.6)'
+}
+
+function buildPointsGeoJSON(points, layer) {
+  return {
+    type: 'FeatureCollection',
+    features: points.map((d) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [d.lng, d.lat] },
+      properties: { ...d, _color: getPointColor(d, layer) },
+    })),
+  }
+}
+
+function buildArcsGeoJSON(arcData, layer) {
+  return {
+    type: 'FeatureCollection',
+    features: arcData.map((d) => ({
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [d.startLng, d.startLat],
+          [d.endLng, d.endLat],
+        ],
+      },
+      properties: { _color: getArcColor(d, layer) },
+    })),
+  }
+}
+
+function getTooltipHTML(d, layer) {
+  const base = `font-family: 'Cormorant Garamond', Georgia, serif; background: rgba(10,10,18,0.92); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;`
+  const title = `font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.9);`
+  const sub = `font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; margin-top: 3px;`
+
+  let subtitle = d.period || ''
+  if (layer === 'marian') subtitle = `${d.location} · ${d.yearDisplay}`
+  else if (layer === 'mass') subtitle = `${d.sectionLabel} · ${d.origin}`
+  else if (layer === 'spread') subtitle = `${d.location} · ${d.yearDisplay}`
+
+  return `<div style="${base}"><div style="${title}">${d.name}</div><div style="${sub}">${subtitle}</div></div>`
 }
 
 function App() {
-  const globeRef = useRef()
-  const containerRef = useRef()
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const mapContainer = useRef(null)
+  const mapRef = useRef(null)
+  const popupRef = useRef(null)
+  const rotationRef = useRef(null)
+  const userInteractingRef = useRef(false)
+  const resumeTimeoutRef = useRef(null)
+
   const [activeLayer, setActiveLayer] = useState('jesus')
   const [selected, setSelected] = useState(null)
-  const [hovered, setHovered] = useState(null)
+  const [mapReady, setMapReady] = useState(false)
 
-  const updateDimensions = useCallback(() => {
-    if (containerRef.current) {
-      setDimensions({
-        width: containerRef.current.offsetWidth,
-        height: containerRef.current.offsetHeight,
+  // Compute layer data
+  const { pointsData, arcsData } = useMemo(() => {
+    if (activeLayer === 'marian') return { pointsData: apparitions, arcsData: [] }
+    if (activeLayer === 'mass') return { pointsData: massParts, arcsData: massArcs }
+    if (activeLayer === 'spread') return { pointsData: spreadEvents, arcsData: spreadArcs }
+    return { pointsData: locations, arcsData: arcs }
+  }, [activeLayer])
+
+  // Initialize map
+  useEffect(() => {
+    if (mapRef.current) return
+
+    mapboxgl.accessToken = MAPBOX_TOKEN
+
+    const map = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: {
+        version: 8,
+        name: 'Mercy Dark',
+        sources: {
+          'raster-tiles': {
+            type: 'raster',
+            tiles: [
+              'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=' + MAPBOX_TOKEN,
+            ],
+            tileSize: 256,
+          },
+        },
+        layers: [
+          {
+            id: 'background',
+            type: 'background',
+            paint: { 'background-color': '#0a0a12' },
+          },
+          {
+            id: 'satellite',
+            type: 'raster',
+            source: 'raster-tiles',
+            paint: {
+              'raster-brightness-max': 0.35,
+              'raster-contrast': 0.2,
+              'raster-saturation': -0.5,
+            },
+          },
+        ],
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
+      },
+      center: DEFAULT_VIEWS.jesus.center,
+      zoom: DEFAULT_VIEWS.jesus.zoom,
+      projection: 'globe',
+      maxZoom: 16,
+      minZoom: 1,
+      attributionControl: false,
+    })
+
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
+
+    map.on('style.load', () => {
+      map.setFog({
+        color: '#0a0a12',
+        'high-color': '#1a1a2e',
+        'horizon-blend': 0.08,
+        'space-color': '#0a0a12',
+        'star-intensity': 0.25,
       })
-    }
-  }, [])
-
-  useEffect(() => {
-    updateDimensions()
-    window.addEventListener('resize', updateDimensions)
-    return () => window.removeEventListener('resize', updateDimensions)
-  }, [updateDimensions])
-
-  useEffect(() => {
-    if (!globeRef.current) return
-
-    const globe = globeRef.current
-    const controls = globe.controls()
-    controls.autoRotate = true
-    controls.autoRotateSpeed = 0.3
-    controls.enableDamping = true
-    controls.dampingFactor = 0.1
-    controls.rotateSpeed = 0.8
-    controls.zoomSpeed = 0.6
-    controls.minDistance = 120
-    controls.maxDistance = 500
-
-    controls.addEventListener('start', () => {
-      controls.autoRotate = false
-    })
-    controls.addEventListener('end', () => {
-      setTimeout(() => {
-        controls.autoRotate = true
-      }, 4000)
     })
 
-    globe.pointOfView(DEFAULT_VIEWS.jesus, 0)
+    map.on('load', () => {
+      // Points source & layer
+      map.addSource('points', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+      map.addLayer({
+        id: 'points-glow',
+        type: 'circle',
+        source: 'points',
+        paint: {
+          'circle-radius': 12,
+          'circle-color': ['get', '_color'],
+          'circle-opacity': 0.15,
+          'circle-blur': 1,
+        },
+      })
+      map.addLayer({
+        id: 'points-circle',
+        type: 'circle',
+        source: 'points',
+        paint: {
+          'circle-radius': 5,
+          'circle-color': ['get', '_color'],
+          'circle-opacity': 0.9,
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': 'rgba(255,255,255,0.25)',
+        },
+      })
 
-    const scene = globe.scene()
-    scene.fog = null
-  }, [])
+      // Arcs source & layer
+      map.addSource('arcs', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+      map.addLayer({
+        id: 'arcs-line',
+        type: 'line',
+        source: 'arcs',
+        paint: {
+          'line-color': ['get', '_color'],
+          'line-opacity': 0.4,
+          'line-width': 1.5,
+          'line-dasharray': [2, 2],
+        },
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round',
+        },
+      })
 
-  const handleLayerChange = useCallback((layer) => {
-    setActiveLayer(layer)
-    setSelected(null)
-    setHovered(null)
-    if (globeRef.current) {
-      globeRef.current.pointOfView(DEFAULT_VIEWS[layer], 1000)
+      // Selected ring source & layer
+      map.addSource('selected-ring', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+      map.addLayer({
+        id: 'selected-ring-layer',
+        type: 'circle',
+        source: 'selected-ring',
+        paint: {
+          'circle-radius': 18,
+          'circle-color': 'transparent',
+          'circle-stroke-width': 2,
+          'circle-stroke-color': ['get', '_color'],
+          'circle-stroke-opacity': 0.5,
+        },
+      })
+
+      mapRef.current = map
+      setMapReady(true)
+    })
+
+    // Hover cursor
+    map.on('mouseenter', 'points-circle', () => {
+      map.getCanvas().style.cursor = 'pointer'
+    })
+    map.on('mouseleave', 'points-circle', () => {
+      map.getCanvas().style.cursor = ''
+      if (popupRef.current) {
+        popupRef.current.remove()
+        popupRef.current = null
+      }
+    })
+
+    // Hover tooltip
+    map.on('mousemove', 'points-circle', (e) => {
+      if (!e.features.length) return
+      const props = e.features[0].properties
+      // Parse stringified nested properties
+      const d = { ...props }
+      const html = getTooltipHTML(d, activeLayer)
+
+      if (popupRef.current) {
+        popupRef.current.setLngLat(e.lngLat).setHTML(html)
+      } else {
+        popupRef.current = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          className: 'mercy-popup',
+          offset: 12,
+        })
+          .setLngLat(e.lngLat)
+          .setHTML(html)
+          .addTo(map)
+      }
+    })
+
+    // Auto-rotation
+    function spinGlobe() {
+      if (!userInteractingRef.current && map) {
+        const center = map.getCenter()
+        center.lng += 0.01
+        map.easeTo({ center, duration: 50, easing: (t) => t })
+      }
+      rotationRef.current = requestAnimationFrame(spinGlobe)
+    }
+    rotationRef.current = requestAnimationFrame(spinGlobe)
+
+    map.on('mousedown', () => { userInteractingRef.current = true })
+    map.on('touchstart', () => { userInteractingRef.current = true })
+    map.on('dragstart', () => { userInteractingRef.current = true })
+
+    const resumeRotation = () => {
+      clearTimeout(resumeTimeoutRef.current)
+      resumeTimeoutRef.current = setTimeout(() => {
+        userInteractingRef.current = false
+      }, 5000)
+    }
+    map.on('mouseup', resumeRotation)
+    map.on('touchend', resumeRotation)
+    map.on('dragend', resumeRotation)
+    map.on('zoomend', resumeRotation)
+
+    return () => {
+      cancelAnimationFrame(rotationRef.current)
+      clearTimeout(resumeTimeoutRef.current)
+      map.remove()
+      mapRef.current = null
     }
   }, [])
 
-  const handlePointClick = useCallback((point) => {
-    setSelected(point)
-    if (globeRef.current) {
-      globeRef.current.pointOfView(
-        { lat: point.lat, lng: point.lng, altitude: 0.6 },
-        800
-      )
-    }
-  }, [])
+  // Update data when layer changes
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !mapReady) return
 
-  const handlePointHover = useCallback((point) => {
-    setHovered(point)
-    document.body.style.cursor = point ? 'pointer' : ''
-  }, [])
+    const pointsSrc = map.getSource('points')
+    const arcsSrc = map.getSource('arcs')
+    const ringSrc = map.getSource('selected-ring')
+
+    if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(pointsData, activeLayer))
+    if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(arcsData, activeLayer))
+    if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
+  }, [pointsData, arcsData, activeLayer, mapReady])
+
+  // Handle point click (registered once, reads activeLayer via ref)
+  const activeLayerRef = useRef(activeLayer)
+  activeLayerRef.current = activeLayer
+
+  const pointsDataRef = useRef(pointsData)
+  pointsDataRef.current = pointsData
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !mapReady) return
+
+    const handleClick = (e) => {
+      if (!e.features.length) return
+      const props = e.features[0].properties
+      // Find the full data object by id
+      const d = pointsDataRef.current.find((p) => String(p.id) === String(props.id))
+      if (!d) return
+
+      setSelected(d)
+
+      // Update selected ring
+      const ringSrc = map.getSource('selected-ring')
+      if (ringSrc) {
+        ringSrc.setData({
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: [d.lng, d.lat] },
+              properties: { _color: getPointColor(d, activeLayerRef.current) },
+            },
+          ],
+        })
+      }
+
+      // Fly to point
+      map.flyTo({
+        center: [d.lng, d.lat],
+        zoom: SELECTED_ZOOM,
+        duration: 1200,
+        essential: true,
+      })
+
+      // Pause rotation
+      userInteractingRef.current = true
+      clearTimeout(resumeTimeoutRef.current)
+      resumeTimeoutRef.current = setTimeout(() => {
+        userInteractingRef.current = false
+      }, 8000)
+    }
+
+    map.on('click', 'points-circle', handleClick)
+    return () => map.off('click', 'points-circle', handleClick)
+  }, [mapReady])
+
+  // Layer change handler
+  const handleLayerChange = useCallback(
+    (layer) => {
+      setActiveLayer(layer)
+      setSelected(null)
+
+      if (popupRef.current) {
+        popupRef.current.remove()
+        popupRef.current = null
+      }
+
+      const map = mapRef.current
+      if (map) {
+        const view = DEFAULT_VIEWS[layer]
+        map.flyTo({
+          center: view.center,
+          zoom: view.zoom,
+          duration: 1500,
+          essential: true,
+        })
+      }
+    },
+    [],
+  )
 
   const handleClosePanel = useCallback(() => {
     setSelected(null)
+    const map = mapRef.current
+    const ringSrc = map && map.getSource('selected-ring')
+    if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
   }, [])
-
-  // Layer-specific data
-  const isJesus = activeLayer === 'jesus'
-  const isMarian = activeLayer === 'marian'
-  const isMass = activeLayer === 'mass'
-  const isSpread = activeLayer === 'spread'
-
-  let pointsData = locations
-  let arcsData = arcs
-  if (isMarian) {
-    pointsData = apparitions
-    arcsData = []
-  } else if (isMass) {
-    pointsData = massParts
-    arcsData = massArcs
-  } else if (isSpread) {
-    pointsData = spreadEvents
-    arcsData = spreadArcs
-  }
-
-  const getPointColor = (d) => {
-    if (isMarian) return MARIAN_COLOR
-    if (isMass) return massPartColors[d.section] || '#c4a35a'
-    if (isSpread) return eraColors[d.era] || '#c9a0dc'
-    return categoryColors[d.category] || '#c9a0dc'
-  }
-
-  const getArcColor = (d) => {
-    if (isMass) {
-      const c = massPartColors[d.section] || '#c4a35a'
-      return c + '55'
-    }
-    if (isSpread) {
-      const c = eraColors[d.era] || '#c9a0dc'
-      return c + '44'
-    }
-    return 'rgba(201, 160, 220, 0.25)'
-  }
-
-  const getPointLabel = (d) => {
-    if (isMarian) {
-      return `<div style="font-family: 'Cormorant Garamond', Georgia, serif; background: rgba(10,10,18,0.88); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;">
-        <div style="font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.9);">${d.name}</div>
-        <div style="font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; margin-top: 2px;">${d.location} &middot; ${d.yearDisplay}</div>
-      </div>`
-    }
-    if (isMass) {
-      return `<div style="font-family: 'Cormorant Garamond', Georgia, serif; background: rgba(10,10,18,0.88); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;">
-        <div style="font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.9);">${d.name}</div>
-        <div style="font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; margin-top: 2px;">${d.sectionLabel} &middot; ${d.origin}</div>
-      </div>`
-    }
-    if (isSpread) {
-      return `<div style="font-family: 'Cormorant Garamond', Georgia, serif; background: rgba(10,10,18,0.88); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;">
-        <div style="font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.9);">${d.name}</div>
-        <div style="font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; margin-top: 2px;">${d.location} &middot; ${d.yearDisplay}</div>
-      </div>`
-    }
-    return `<div style="font-family: 'Cormorant Garamond', Georgia, serif; background: rgba(10,10,18,0.88); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); pointer-events: none;">
-      <div style="font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.9);">${d.name}</div>
-      <div style="font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; margin-top: 2px;">${d.period}</div>
-    </div>`
-  }
-
-  const getRingColor = () => (t) => {
-    if (isMarian) return `rgba(107, 164, 201, ${0.3 * (1 - t)})`
-    if (isMass) return `rgba(196, 163, 90, ${0.3 * (1 - t)})`
-    if (isSpread) return `rgba(138, 184, 122, ${0.3 * (1 - t)})`
-    return `rgba(255, 255, 255, ${0.3 * (1 - t)})`
-  }
 
   return (
     <div className="app">
@@ -193,57 +414,7 @@ function App() {
 
       <LayerToggle activeLayer={activeLayer} onLayerChange={handleLayerChange} />
 
-      <div className="globe-container" ref={containerRef}>
-        {dimensions.width > 0 && (
-          <Globe
-            ref={globeRef}
-            width={dimensions.width}
-            height={dimensions.height}
-            globeImageUrl={GLOBE_IMAGE}
-            bumpImageUrl={BUMP_IMAGE}
-            backgroundColor="rgba(0,0,0,0)"
-            atmosphereColor={ATMOSPHERE_COLORS[activeLayer]}
-            atmosphereAltitude={0.2}
-            animateIn={true}
-            // Point markers
-            pointsData={pointsData}
-            pointLat="lat"
-            pointLng="lng"
-            pointColor={getPointColor}
-            pointAltitude={d => (selected && selected.id === d.id ? 0.06 : 0.02)}
-            pointRadius={d => {
-              if (selected && selected.id === d.id) return 0.35
-              if (hovered && hovered.id === d.id) return 0.3
-              return isMarian ? 0.25 : isSpread ? 0.25 : 0.2
-            }}
-            pointLabel={getPointLabel}
-            onPointClick={handlePointClick}
-            onPointHover={handlePointHover}
-            pointsTransitionDuration={300}
-            // Travel path arcs
-            arcsData={arcsData}
-            arcStartLat="startLat"
-            arcStartLng="startLng"
-            arcEndLat="endLat"
-            arcEndLng="endLng"
-            arcColor={getArcColor}
-            arcAltitudeAutoScale={isSpread ? 0.35 : isMass ? 0.25 : 0.3}
-            arcStroke={isMass ? 0.4 : isSpread ? 0.35 : 0.3}
-            arcDashLength={0.4}
-            arcDashGap={0.2}
-            arcDashAnimateTime={isSpread ? 3500 : isMass ? 3000 : 2500}
-            arcsTransitionDuration={500}
-            // Rings on selected point
-            ringsData={selected ? [selected] : []}
-            ringLat="lat"
-            ringLng="lng"
-            ringColor={getRingColor}
-            ringMaxRadius={isMarian ? 3.5 : isSpread ? 4 : 2.5}
-            ringPropagationSpeed={1.5}
-            ringRepeatPeriod={1200}
-          />
-        )}
-      </div>
+      <div className="globe-container" ref={mapContainer} />
 
       <InfoPanel location={selected} layer={activeLayer} onClose={handleClosePanel} />
 
