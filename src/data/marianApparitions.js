@@ -15,6 +15,7 @@ const apparitions = [
     description:
       'According to ancient tradition, the Blessed Virgin appeared to the Apostle James while he was preaching in Spain, standing atop a pillar of jasper. She encouraged him in his mission and left the pillar as a sign of her presence.',
     approval: 'Ancient tradition; venerated since the early Church',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_the_Pillar',
   },
   {
     id: 'ma-2',
@@ -29,6 +30,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to the Saxon noblewoman Richeldis and asked her to build a replica of the Holy House of Nazareth. Walsingham became one of the great pilgrimage sites of medieval Christendom.',
     approval: 'Approved by the local bishop; major medieval pilgrimage site',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Walsingham',
   },
   {
     id: 'ma-3',
@@ -43,6 +45,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to the indigenous peasant Juan Diego on Tepeyac Hill, leaving her miraculous image imprinted on his tilma. The apparition led to the conversion of millions throughout the Americas.',
     approval: 'Approved by Archbishop Zumárraga (1531); feast day December 12',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Guadalupe',
   },
   {
     id: 'ma-4',
@@ -57,6 +60,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared weeping on a rock to children near the village, lamenting that her Son was being forgotten. The site had once held a Catholic chapel before the Reformation.',
     approval: 'Approved by the local bishop; confirmed by the Holy See',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_%C5%A0iluva',
   },
   {
     id: 'ma-5',
@@ -71,6 +75,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared over 54 years to the shepherdess Benoîte Rencurel, asking for a church to be built for the conversion of sinners. The sanctuary became a center of reconciliation.',
     approval: 'Approved by Bishop di Falco of Gap (2008)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Laus',
   },
   {
     id: 'ma-6',
@@ -85,6 +90,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to the young novice Catherine Labouré in the chapel at Rue du Bac, requesting that a medal be struck. "All who wear it will receive great graces."',
     approval: 'Approved by Archbishop de Quélen of Paris (1836)',
+    link: 'https://en.wikipedia.org/wiki/Miraculous_Medal',
   },
   {
     id: 'ma-7',
@@ -99,6 +105,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared weeping to two shepherd children on a mountainside, lamenting offenses against her Son and calling for prayer, penance, and observance of the Lord\'s Day.',
     approval: 'Approved by Bishop de Bruillard of Grenoble (1851)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_La_Salette',
   },
   {
     id: 'ma-8',
@@ -113,6 +120,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared eighteen times to the young Bernadette in the grotto of Massabielle, declaring "I am the Immaculate Conception" and calling for prayer and penance. A miraculous spring began to flow.',
     approval: 'Approved by Bishop Laurence of Tarbes (1862); feast day February 11',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Lourdes',
   },
   {
     id: 'ma-9',
@@ -127,6 +135,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to the Belgian immigrant Adele Brise, instructing her to teach the children their catechism and to pray for the conversion of sinners. The only approved Marian apparition in the United States.',
     approval: 'Approved by Bishop Ricken of Green Bay (2010)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Good_Help',
   },
   {
     id: 'ma-10',
@@ -141,6 +150,7 @@ const apparitions = [
     description:
       'During the Franco-Prussian War, the Blessed Virgin appeared in the night sky above the village to several children. A message appeared: "But pray, my children. God will hear you in time." The Prussian advance halted that night.',
     approval: 'Approved by Bishop Wicart of Laval (1872)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Pontmain',
   },
   {
     id: 'ma-11',
@@ -155,6 +165,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared silently at the south gable of the parish church, accompanied by St. Joseph, St. John the Evangelist, and a Lamb on an altar. Fifteen villagers witnessed the apparition in the rain for two hours.',
     approval: 'Approved by Archbishop McHale of Tuam (1879); papal visit by John Paul II (1979)',
+    link: 'https://en.wikipedia.org/wiki/Knock_Shrine',
   },
   {
     id: 'ma-12',
@@ -169,6 +180,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared six times to three shepherd children in the Cova da Iria, asking for prayer of the Rosary, penance, and consecration of Russia. The Miracle of the Sun was witnessed by tens of thousands on October 13.',
     approval: 'Approved by Bishop da Silva of Leiria (1930); feast day May 13',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_F%C3%A1tima',
   },
   {
     id: 'ma-13',
@@ -183,6 +195,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared thirty-three times to five children near a railway viaduct, revealing her golden, shining heart and asking, "Do you love my Son? Do you love me? Then sacrifice yourselves for me."',
     approval: 'Approved by Bishop Charue of Namur (1949)',
+    link: 'https://en.wikipedia.org/wiki/Beauraing',
   },
   {
     id: 'ma-14',
@@ -197,6 +210,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared eight times to the young girl Mariette Beco in the garden of her family\'s home, leading her to a spring and declaring, "I am the Virgin of the Poor." She asked for a small chapel.',
     approval: 'Approved by Bishop Kerkhofs of Liège (1949)',
+    link: 'https://en.wikipedia.org/wiki/Banneux',
   },
   {
     id: 'ma-15',
@@ -211,6 +225,7 @@ const apparitions = [
     description:
       'Luminous apparitions of the Blessed Virgin appeared above St. Mary\'s Coptic Church over the course of several years, witnessed by enormous crowds of Christians and Muslims alike, and captured in photographs.',
     approval: 'Approved by Coptic Orthodox Patriarch Kyrillos VI (1968); acknowledged by the Catholic Church',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Zeitoun',
   },
   {
     id: 'ma-16',
@@ -225,6 +240,7 @@ const apparitions = [
     description:
       'A wooden statue of the Blessed Virgin wept on multiple occasions witnessed by many, and Sr. Agnes received messages calling for prayer, penance, and reparation. Cardinal Ratzinger (later Benedict XVI) confirmed the approval.',
     approval: 'Approved by Bishop Ito of Niigata (1984)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Akita',
   },
   {
     id: 'ma-17',
@@ -239,6 +255,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared multiple times at a farm called Finca Betania to María Esperanza and later to large groups. She called for family unity, reconciliation, and devotion to the Eucharist.',
     approval: 'Approved by Bishop Pio Bello Ricardo of Los Teques (1987)',
+    link: 'https://en.wikipedia.org/wiki/Maria_Esperanza_Medrano_de_Bianchini',
   },
   {
     id: 'ma-18',
@@ -253,6 +270,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to three young students, showing them terrifying visions that would be understood as foretelling the 1994 Rwandan genocide. She called the world to prayer, fasting, and conversion of heart.',
     approval: 'Approved by Bishop Misago of Gikongoro (2001)',
+    link: 'https://en.wikipedia.org/wiki/Kibeho_apparitions',
   },
   {
     id: 'ma-19',
@@ -267,6 +285,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to Gladys, a mother and homemaker, calling for devotion to the Rosary, Eucharistic adoration, and family prayer. A large sanctuary was built at the site.',
     approval: 'Approved by Bishop Cardelli of San Nicolás (2016)',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_the_Rosary_of_San_Nicol%C3%A1s',
   },
 ]
 
