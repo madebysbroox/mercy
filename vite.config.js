@@ -8,8 +8,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ['three'],
-          globe: ['react-globe.gl'],
+          mapbox: ['mapbox-gl'],
         },
       },
     },
