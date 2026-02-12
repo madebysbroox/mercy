@@ -43,6 +43,45 @@ function getArcColor(d, layer) {
   return 'rgba(201, 160, 220, 0.6)'
 }
 
+const TRAVELER_CYCLE_MS = 45000
+
+function buildWaypoints(arcData) {
+  if (!arcData.length) return []
+  const pts = [[arcData[0].startLng, arcData[0].startLat]]
+  for (const a of arcData) pts.push([a.endLng, a.endLat])
+  return pts
+}
+
+function computeCumulativeDist(waypoints) {
+  const d = [0]
+  for (let i = 1; i < waypoints.length; i++) {
+    const dx = waypoints[i][0] - waypoints[i - 1][0]
+    const dy = waypoints[i][1] - waypoints[i - 1][1]
+    d.push(d[i - 1] + Math.sqrt(dx * dx + dy * dy))
+  }
+  return d
+}
+
+function lerpOnPath(waypoints, cumDist, t) {
+  const total = cumDist[cumDist.length - 1]
+  const target = t * total
+  let i = 1
+  while (i < cumDist.length - 1 && cumDist[i] < target) i++
+  const segLen = cumDist[i] - cumDist[i - 1]
+  const segT = segLen > 0 ? (target - cumDist[i - 1]) / segLen : 0
+  return [
+    waypoints[i - 1][0] + (waypoints[i][0] - waypoints[i - 1][0]) * segT,
+    waypoints[i - 1][1] + (waypoints[i][1] - waypoints[i - 1][1]) * segT,
+  ]
+}
+
+function getTravelerColor(layer) {
+  if (layer === 'marian') return MARIAN_COLOR
+  if (layer === 'mass') return '#c4a35a'
+  if (layer === 'spread') return '#c9a0dc'
+  return '#c9a0dc'
+}
+
 function buildPointsGeoJSON(points, layer) {
   return {
     type: 'FeatureCollection',
@@ -91,6 +130,7 @@ function App() {
   const rotationRef = useRef(null)
   const userInteractingRef = useRef(false)
   const resumeTimeoutRef = useRef(null)
+  const travelerRafRef = useRef(null)
 
   const [activeLayer, setActiveLayer] = useState('jesus')
   const [selected, setSelected] = useState(null)
@@ -232,6 +272,33 @@ function App() {
         },
       })
 
+      // Traveling light source & layers
+      map.addSource('traveler', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+      })
+      map.addLayer({
+        id: 'traveler-glow',
+        type: 'circle',
+        source: 'traveler',
+        paint: {
+          'circle-radius': 20,
+          'circle-color': ['get', '_color'],
+          'circle-opacity': 0.3,
+          'circle-blur': 1,
+        },
+      })
+      map.addLayer({
+        id: 'traveler-dot',
+        type: 'circle',
+        source: 'traveler',
+        paint: {
+          'circle-radius': 3,
+          'circle-color': '#ffffff',
+          'circle-opacity': 0.9,
+        },
+      })
+
       mapRef.current = map
       setMapReady(true)
     })
@@ -299,6 +366,7 @@ function App() {
 
     return () => {
       cancelAnimationFrame(rotationRef.current)
+      if (travelerRafRef.current) cancelAnimationFrame(travelerRafRef.current)
       clearTimeout(resumeTimeoutRef.current)
       map.remove()
       mapRef.current = null
@@ -318,6 +386,51 @@ function App() {
     if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(arcsData, activeLayer))
     if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
   }, [pointsData, arcsData, activeLayer, mapReady])
+
+  // Traveling light animation
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !mapReady) return
+
+    if (!arcsData.length) {
+      const src = map.getSource('traveler')
+      if (src) src.setData({ type: 'FeatureCollection', features: [] })
+      return
+    }
+
+    const waypoints = buildWaypoints(arcsData)
+    if (waypoints.length < 2) return
+
+    const cumDist = computeCumulativeDist(waypoints)
+    const color = getTravelerColor(activeLayer)
+
+    let start = null
+    function tick(ts) {
+      if (!start) start = ts
+      const t = ((ts - start) % TRAVELER_CYCLE_MS) / TRAVELER_CYCLE_MS
+      const pos = lerpOnPath(waypoints, cumDist, t)
+      const src = map.getSource('traveler')
+      if (src) {
+        src.setData({
+          type: 'FeatureCollection',
+          features: [{
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: pos },
+            properties: { _color: color },
+          }],
+        })
+      }
+      travelerRafRef.current = requestAnimationFrame(tick)
+    }
+
+    travelerRafRef.current = requestAnimationFrame(tick)
+
+    return () => {
+      if (travelerRafRef.current) cancelAnimationFrame(travelerRafRef.current)
+      const src = map.getSource('traveler')
+      if (src) src.setData({ type: 'FeatureCollection', features: [] })
+    }
+  }, [arcsData, activeLayer, mapReady])
 
   // Handle point click (registered once, reads activeLayer via ref)
   const activeLayerRef = useRef(activeLayer)
