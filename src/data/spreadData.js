@@ -26,6 +26,7 @@ const spreadEvents = [
       'The Holy Spirit descends upon the Apostles in the Upper Room. Peter preaches and three thousand are baptized. The Church is born and begins to spread from Jerusalem.',
     keyFigure: 'The Apostles',
     scripture: 'Acts 2:1–41',
+    link: 'https://en.wikipedia.org/wiki/Pentecost',
   },
   {
     id: 'sp-02',
@@ -41,6 +42,7 @@ const spreadEvents = [
       'Believers fleeing persecution in Jerusalem preach to Greeks in Antioch. It is here that disciples are first called "Christians." Antioch becomes the launchpad for Paul\'s missionary journeys.',
     keyFigure: 'Sts. Paul & Barnabas',
     scripture: 'Acts 11:19–26',
+    link: 'https://en.wikipedia.org/wiki/Church_of_Antioch',
   },
   {
     id: 'sp-03',
@@ -56,6 +58,7 @@ const spreadEvents = [
       'Paul spends eighteen months establishing one of the most important early communities. His letters to the Corinthians are among the earliest written documents of Christianity.',
     keyFigure: 'St. Paul',
     scripture: 'Acts 18:1–11',
+    link: 'https://en.wikipedia.org/wiki/First_Epistle_to_the_Corinthians',
   },
   {
     id: 'sp-04',
@@ -71,6 +74,7 @@ const spreadEvents = [
       'Paul teaches daily in the hall of Tyrannus for two years, so that "all who lived in Asia heard the word of the Lord." Ephesus becomes a center of Christianity in Asia Minor.',
     keyFigure: 'St. Paul',
     scripture: 'Acts 19:1–10',
+    link: 'https://en.wikipedia.org/wiki/Ephesus',
   },
   {
     id: 'sp-05',
@@ -86,6 +90,7 @@ const spreadEvents = [
       'Both Peter and Paul bring the Gospel to the heart of the Roman Empire. Their martyrdom under Nero consecrates Rome as the center of the Western Church and the See of Peter.',
     keyFigure: 'Sts. Peter & Paul',
     scripture: 'Romans 1:7–15',
+    link: 'https://en.wikipedia.org/wiki/Saint_Peter',
   },
   {
     id: 'sp-06',
@@ -101,6 +106,7 @@ const spreadEvents = [
       'According to strong tradition, the Apostle Thomas traveled to the Malabar Coast, establishing Christian communities that endure to this day as the Syro-Malabar and Syro-Malankara Churches — among the oldest in the world.',
     keyFigure: 'St. Thomas the Apostle',
     scripture: 'John 20:24–29',
+    link: 'https://en.wikipedia.org/wiki/Saint_Thomas_Christians',
   },
   {
     id: 'sp-07',
@@ -116,6 +122,7 @@ const spreadEvents = [
       'The evangelist Mark founds the Church in Alexandria, which becomes one of the great patriarchates and a center of Christian theology. The Catechetical School of Alexandria produces Clement and Origen.',
     keyFigure: 'St. Mark the Evangelist',
     scripture: 'Mark 16:15',
+    link: 'https://en.wikipedia.org/wiki/Mark_the_Evangelist',
   },
 
   // ──────────────────────── ROMAN EMPIRE ERA ────────────────────────
@@ -132,6 +139,7 @@ const spreadEvents = [
     description:
       'The martyrs of Lyon and Vienne, including the slave girl Blandina, bear witness under brutal persecution. Their bishop Irenaeus, a disciple of Polycarp who knew the Apostle John, becomes a pillar of orthodox theology.',
     keyFigure: 'St. Irenaeus of Lyon',
+    link: 'https://en.wikipedia.org/wiki/Irenaeus',
   },
   {
     id: 'sp-09',
@@ -146,6 +154,7 @@ const spreadEvents = [
     description:
       'North Africa becomes a powerhouse of Latin Christianity. Tertullian writes the first major theological works in Latin; later, Cyprian as bishop and Augustine of nearby Hippo shape Western theology for centuries.',
     keyFigure: 'Tertullian, St. Cyprian, St. Augustine',
+    link: 'https://en.wikipedia.org/wiki/Christianity_in_Africa#North_Africa',
   },
   {
     id: 'sp-10',
@@ -160,6 +169,7 @@ const spreadEvents = [
     description:
       'King Tiridates III is baptized by Gregory the Illuminator, making Armenia the first nation to adopt Christianity as its state religion — even before the Roman Empire.',
     keyFigure: 'St. Gregory the Illuminator',
+    link: 'https://en.wikipedia.org/wiki/Armenian_Apostolic_Church',
   },
   {
     id: 'sp-11',
@@ -174,6 +184,7 @@ const spreadEvents = [
     description:
       'Emperor Constantine and Licinius issue the Edict of Milan, granting religious tolerance throughout the Roman Empire. Three centuries of intermittent persecution end, and Christianity can worship freely.',
     keyFigure: 'Emperor Constantine',
+    link: 'https://en.wikipedia.org/wiki/Edict_of_Milan',
   },
   {
     id: 'sp-12',
@@ -188,6 +199,7 @@ const spreadEvents = [
     description:
       'King Ezana of Axum converts to Christianity through the influence of Frumentius, who is consecrated the first bishop of Ethiopia by Athanasius of Alexandria. The Ethiopian Orthodox Church traces its roots to this moment.',
     keyFigure: 'St. Frumentius',
+    link: 'https://en.wikipedia.org/wiki/Ethiopian_Orthodox_Tewahedo_Church',
   },
   {
     id: 'sp-13',
@@ -202,6 +214,7 @@ const spreadEvents = [
     description:
       'St. Nino, a captive woman from Cappadocia, converts King Mirian III and Queen Nana of Iberia (Georgia). The Georgian Orthodox Church is one of the oldest Christian communities in the world.',
     keyFigure: 'St. Nino',
+    link: 'https://en.wikipedia.org/wiki/Nino_(saint)',
   },
 
   // ──────────────────────── MEDIEVAL EXPANSION ────────────────────────
@@ -218,6 +231,7 @@ const spreadEvents = [
     description:
       'St. Patrick, a former slave, returns to Ireland as a bishop and missionary. Within a generation, Ireland is transformed into a center of Christian learning that will later re-evangelize much of Europe.',
     keyFigure: 'St. Patrick',
+    link: 'https://en.wikipedia.org/wiki/Saint_Patrick',
   },
   {
     id: 'sp-15',
@@ -232,6 +246,7 @@ const spreadEvents = [
     description:
       'King Clovis I of the Franks is baptized by St. Remigius, bringing the most powerful Germanic kingdom into Catholic Christianity. France becomes "the eldest daughter of the Church."',
     keyFigure: 'St. Remigius',
+    link: 'https://en.wikipedia.org/wiki/Clovis_I#Conversion_to_Catholicism',
   },
   {
     id: 'sp-16',
@@ -246,6 +261,7 @@ const spreadEvents = [
     description:
       'Pope Gregory the Great sends Augustine and forty monks to the Anglo-Saxons. King Ethelbert of Kent converts, and Canterbury becomes the mother church of English Christianity.',
     keyFigure: 'St. Augustine of Canterbury',
+    link: 'https://en.wikipedia.org/wiki/Augustine_of_Canterbury',
   },
   {
     id: 'sp-17',
@@ -260,6 +276,7 @@ const spreadEvents = [
     description:
       'Grand Prince Vladimir of Kyiv receives baptism and orders the baptism of his people in the Dnieper River. Christianity spreads across the vast lands of Kievan Rus\', shaping the civilization of Eastern Europe.',
     keyFigure: 'St. Vladimir the Great',
+    link: 'https://en.wikipedia.org/wiki/Baptism_of_Kyiv',
   },
   {
     id: 'sp-18',
@@ -274,6 +291,7 @@ const spreadEvents = [
     description:
       'Norway, Denmark, Iceland, and Sweden gradually embrace Christianity between the 10th and 12th centuries. The Nidaros Cathedral at Trondheim becomes the northernmost major pilgrimage site in Christendom.',
     keyFigure: 'St. Olaf of Norway',
+    link: 'https://en.wikipedia.org/wiki/Christianization_of_Scandinavia',
   },
   {
     id: 'sp-19',
@@ -288,6 +306,7 @@ const spreadEvents = [
     description:
       'Grand Duke Jogaila is baptized and Lithuania, the last pagan state in Europe, officially becomes Catholic. The baptism unites Lithuania and Poland in a personal union that will endure for centuries.',
     keyFigure: 'King Władysław II Jagiełło',
+    link: 'https://en.wikipedia.org/wiki/Christianization_of_Lithuania',
   },
 
   // ──────────────────────── AGE OF EXPLORATION ────────────────────────
@@ -304,6 +323,7 @@ const spreadEvents = [
     description:
       'Following the apparition of Our Lady of Guadalupe to Juan Diego, nine million indigenous people are baptized within a decade. Latin America becomes the most Catholic continent on earth.',
     keyFigure: 'St. Juan Diego',
+    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Guadalupe',
   },
   {
     id: 'sp-21',
@@ -318,6 +338,7 @@ const spreadEvents = [
     description:
       'The Jesuit missionary Francis Xavier arrives in Kagoshima and begins evangelizing Japan. Within decades there are hundreds of thousands of Japanese Christians — a community that will endure even through centuries of persecution.',
     keyFigure: 'St. Francis Xavier',
+    link: 'https://en.wikipedia.org/wiki/Francis_Xavier',
   },
   {
     id: 'sp-22',
@@ -332,6 +353,7 @@ const spreadEvents = [
     description:
       'Magellan\'s expedition plants the cross in Cebu and baptizes Chief Humabon and hundreds of islanders. The Philippines becomes the only predominantly Catholic nation in Asia, a faith deeply woven into Filipino identity.',
     keyFigure: 'Ferdinand Magellan',
+    link: 'https://en.wikipedia.org/wiki/Christianity_in_the_Philippines',
   },
   {
     id: 'sp-23',
@@ -346,6 +368,7 @@ const spreadEvents = [
     description:
       'The Jesuit Reductions create self-governing Christian communities among the Guaraní people across present-day Paraguay, Argentina, and Brazil. At their height, over 100,000 indigenous people live in these missions.',
     keyFigure: 'Society of Jesus',
+    link: 'https://en.wikipedia.org/wiki/Jesuit_reductions',
   },
   {
     id: 'sp-24',
@@ -360,6 +383,7 @@ const spreadEvents = [
     description:
       'The Jesuit Matteo Ricci gains access to the imperial court in Beijing, pioneering a mission of inculturation — presenting Christianity through Chinese philosophical categories and earning the respect of scholars.',
     keyFigure: 'Matteo Ricci, S.J.',
+    link: 'https://en.wikipedia.org/wiki/Matteo_Ricci',
   },
 
   // ──────────────────────── MODERN MISSIONS ────────────────────────
@@ -376,6 +400,7 @@ const spreadEvents = [
     description:
       'Uniquely in Church history, Korean Catholicism is founded not by foreign missionaries but by lay scholars who discovered the faith through Chinese texts. Over 10,000 martyrs bear witness during waves of persecution.',
     keyFigure: 'St. Andrew Kim Taegon & companions',
+    link: 'https://en.wikipedia.org/wiki/Korean_Martyrs',
   },
   {
     id: 'sp-26',
@@ -390,6 +415,7 @@ const spreadEvents = [
     description:
       'The Holy Ghost Fathers establish one of the first mission stations in East Africa at Bagamoyo. The 19th and 20th centuries see explosive growth; by 2025, Africa has the fastest-growing Catholic population in the world.',
     keyFigure: 'Spiritan Missionaries',
+    link: 'https://en.wikipedia.org/wiki/Christianity_in_Africa',
   },
   {
     id: 'sp-27',
@@ -404,6 +430,7 @@ const spreadEvents = [
     description:
       'Twenty-two Catholic and twenty-three Anglican converts are martyred on the orders of Kabaka Mwanga II. Their witness ignites the faith in East Africa; today Uganda is one of the most Christian nations on the continent.',
     keyFigure: 'St. Charles Lwanga & companions',
+    link: 'https://en.wikipedia.org/wiki/Uganda_Martyrs',
   },
   {
     id: 'sp-28',
@@ -418,6 +445,7 @@ const spreadEvents = [
     description:
       'Irish convicts and settlers bring the faith to Australia; Marist and other missionaries carry it across the Pacific Islands. World Youth Day 2008 in Sydney signals Oceania\'s place in the global Church.',
     keyFigure: 'Fr. John Joseph Therry & Marist Fathers',
+    link: 'https://en.wikipedia.org/wiki/Catholic_Church_in_Australia',
   },
   {
     id: 'sp-29',
@@ -432,6 +460,7 @@ const spreadEvents = [
     description:
       'Alexandre de Rhodes and Jesuit missionaries bring Christianity to Vietnam, creating the Vietnamese romanized script (Quốc Ngữ) in the process. Despite centuries of persecution, Vietnam has nearly seven million Catholics today.',
     keyFigure: 'Alexandre de Rhodes, S.J.; Vietnamese Martyrs',
+    link: 'https://en.wikipedia.org/wiki/Catholic_Church_in_Vietnam',
   },
   {
     id: 'sp-30',
@@ -446,6 +475,7 @@ const spreadEvents = [
     description:
       'John Carroll is appointed the first Catholic bishop in the United States. From a small, marginalized community, American Catholicism grows through waves of immigration to become the nation\'s largest single denomination.',
     keyFigure: 'Bishop John Carroll',
+    link: 'https://en.wikipedia.org/wiki/John_Carroll_(bishop)',
   },
 ]
 

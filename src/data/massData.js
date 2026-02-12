@@ -24,6 +24,7 @@ const massParts = [
       'The faithful mark themselves with the sign of the Cross, invoking the Holy Trinity. Early Christians in Jerusalem traced the cross on their foreheads; Tertullian attests to the practice by AD 200.',
     scripture: 'Matthew 28:19',
     liturgicalText: 'In the name of the Father, and of the Son, and of the Holy Spirit.',
+    link: 'https://en.wikipedia.org/wiki/Sign_of_the_cross',
   },
   {
     id: 'mass-02',
@@ -39,6 +40,7 @@ const massParts = [
       'The congregation acknowledges their sinfulness and asks for God\'s mercy. The Confiteor ("I confess") was formalized in the Roman liturgy during the medieval period, though penitential prayers opened worship from the earliest centuries.',
     scripture: '1 John 1:8–9',
     liturgicalText: 'I confess to almighty God and to you, my brothers and sisters…',
+    link: 'https://en.wikipedia.org/wiki/Confiteor',
   },
   {
     id: 'mass-03',
@@ -54,6 +56,7 @@ const massParts = [
       'The ancient Greek cry "Lord, have mercy" entered Christian worship from the Eastern liturgical tradition. It is one of the few Greek phrases preserved in the Latin Mass, a bridge between East and West.',
     scripture: 'Mark 10:47',
     liturgicalText: 'Kyrie, eleison. Christe, eleison. Kyrie, eleison.',
+    link: 'https://en.wikipedia.org/wiki/Kyrie',
   },
   {
     id: 'mass-04',
@@ -69,6 +72,7 @@ const massParts = [
       'The "Great Doxology" begins with the angels\' hymn at Christ\'s birth. Originally a morning prayer in the East, it was introduced into the Roman Mass by Pope Symmachus around AD 500, initially only for bishops on feast days.',
     scripture: 'Luke 2:14',
     liturgicalText: 'Glory to God in the highest, and on earth peace to people of good will.',
+    link: 'https://en.wikipedia.org/wiki/Gloria_in_excelsis_Deo',
   },
 
   // ──────────────────────── LITURGY OF THE WORD ────────────────────────
@@ -86,6 +90,7 @@ const massParts = [
       'The reading of the Hebrew Scriptures in Christian worship continues the synagogue practice that Jesus himself participated in. The early Church preserved this link to salvation history as the foundation for understanding the Gospel.',
     scripture: 'Luke 4:16–21',
     liturgicalText: 'The Word of the Lord. — Thanks be to God.',
+    link: 'https://en.wikipedia.org/wiki/Liturgy_of_the_Word',
   },
   {
     id: 'mass-06',
@@ -101,6 +106,7 @@ const massParts = [
       'The Psalms of David, sung antiphonally in the Temple, became the prayer book of the Church. The congregation\'s sung response to the lector carries forward three thousand years of worship in the same words.',
     scripture: 'Psalm 150',
     liturgicalText: 'The response varies with the liturgical season.',
+    link: 'https://en.wikipedia.org/wiki/Responsorial_psalm',
   },
   {
     id: 'mass-07',
@@ -116,6 +122,7 @@ const massParts = [
       'Paul\'s letters were read aloud in the assemblies to which they were sent, and then circulated among other churches. This practice of public reading of apostolic writings became a fixed part of the liturgy by the 2nd century.',
     scripture: 'Colossians 4:16',
     liturgicalText: 'The Word of the Lord. — Thanks be to God.',
+    link: 'https://en.wikipedia.org/wiki/Epistle_in_the_liturgy',
   },
   {
     id: 'mass-08',
@@ -131,6 +138,7 @@ const massParts = [
       '"Alleluia" — Praise the Lord — is a Hebrew liturgical acclamation from Temple worship. The congregation stands and sings it to greet the proclamation of the Gospel, acknowledging the presence of Christ in his Word.',
     scripture: 'Revelation 19:1–6',
     liturgicalText: 'Alleluia, alleluia!',
+    link: 'https://en.wikipedia.org/wiki/Gospel_acclamation',
   },
   {
     id: 'mass-09',
@@ -146,6 +154,7 @@ const massParts = [
       'The highpoint of the Liturgy of the Word: the deacon or priest proclaims the words and deeds of Jesus from the four Gospels. The assembly stands in reverence, as the living voice of Christ speaks to his Church.',
     scripture: 'John 1:14',
     liturgicalText: 'The Gospel of the Lord. — Praise to you, Lord Jesus Christ.',
+    link: 'https://en.wikipedia.org/wiki/Gospel_reading',
   },
   {
     id: 'mass-10',
@@ -161,6 +170,7 @@ const massParts = [
       'Following the Jewish synagogue tradition, the early Church included an explanation of the Scriptures. The great homilists of Antioch — Ignatius, John Chrysostom — shaped this tradition of breaking open the Word for the assembly.',
     scripture: 'Nehemiah 8:8',
     liturgicalText: 'No fixed text — the homilist speaks from the readings of the day.',
+    link: 'https://en.wikipedia.org/wiki/Homily',
   },
   {
     id: 'mass-11',
@@ -176,6 +186,7 @@ const massParts = [
       'The profession of faith formulated at the Councils of Nicaea (325) and Constantinople (381) in response to heresies. The entire congregation professes the core truths of the faith together, a living link to the early Church Fathers.',
     scripture: '1 Corinthians 15:3–5',
     liturgicalText: 'I believe in one God, the Father almighty, maker of heaven and earth…',
+    link: 'https://en.wikipedia.org/wiki/Nicene_Creed',
   },
   {
     id: 'mass-12',
@@ -191,6 +202,7 @@ const massParts = [
       'The baptized exercise their priestly office by interceding for the Church and the world. Justin Martyr describes this practice in Rome around AD 155: after the readings, "we offer prayers in common for ourselves and for all others."',
     scripture: '1 Timothy 2:1–2',
     liturgicalText: 'Lord, hear our prayer.',
+    link: 'https://en.wikipedia.org/wiki/Prayer_of_the_Faithful',
   },
 
   // ──────────────────────── LITURGY OF THE EUCHARIST ────────────────────────
@@ -208,6 +220,7 @@ const massParts = [
       'Bread and wine are brought to the altar, echoing both the Temple offerings and Melchizedek\'s offering of bread and wine. The prayers "Blessed are you, Lord God of all creation" derive from ancient Jewish blessings (berakot).',
     scripture: 'Genesis 14:18; Hebrews 7:1–3',
     liturgicalText: 'Blessed are you, Lord God of all creation, for through your goodness we have received the bread we offer you…',
+    link: 'https://en.wikipedia.org/wiki/Offertory',
   },
   {
     id: 'mass-14',
@@ -223,6 +236,7 @@ const massParts = [
       'The Preface is a solemn prayer of thanksgiving leading to the Sanctus — "Holy, Holy, Holy" — drawn from Isaiah\'s vision of the heavenly liturgy in the Temple. Earth joins the worship of the angels and saints.',
     scripture: 'Isaiah 6:3; Revelation 4:8',
     liturgicalText: 'Holy, Holy, Holy Lord God of hosts. Heaven and earth are full of your glory.',
+    link: 'https://en.wikipedia.org/wiki/Sanctus',
   },
   {
     id: 'mass-15',
@@ -238,6 +252,7 @@ const massParts = [
       'The summit of the Mass: the priest speaks Christ\'s own words over the bread and wine — "This is my Body… This is the chalice of my Blood." The sacrifice of Calvary is made present on the altar. The Church has faithfully repeated these words since the Last Supper.',
     scripture: 'Luke 22:19–20; 1 Corinthians 11:23–26',
     liturgicalText: 'Take this, all of you, and eat of it, for this is my Body, which will be given up for you.',
+    link: 'https://en.wikipedia.org/wiki/Eucharistic_Prayer',
   },
   {
     id: 'mass-16',
@@ -253,6 +268,7 @@ const massParts = [
       'The prayer that Jesus himself taught his disciples. The Didache (c. AD 90) instructs Christians to pray it three times daily. In the Mass it prepares the faithful for Communion — "Give us this day our daily bread."',
     scripture: 'Matthew 6:9–13',
     liturgicalText: 'Our Father, who art in heaven, hallowed be thy name…',
+    link: 'https://en.wikipedia.org/wiki/Lord%27s_Prayer',
   },
   {
     id: 'mass-17',
@@ -268,6 +284,7 @@ const massParts = [
       'The faithful exchange a sign of reconciliation and charity before receiving Communion, fulfilling Christ\'s command to be reconciled before approaching the altar. Justin Martyr and Hippolytus describe this "holy kiss" in the Roman liturgy.',
     scripture: 'Matthew 5:23–24; Romans 16:16',
     liturgicalText: 'The peace of the Lord be with you always. — And with your spirit.',
+    link: 'https://en.wikipedia.org/wiki/Kiss_of_peace',
   },
   {
     id: 'mass-18',
@@ -283,6 +300,7 @@ const massParts = [
       'Pope Sergius I — of Syrian origin — introduced the singing of "Lamb of God" during the fraction rite around AD 700. The chant echoes the words of John the Baptist and the vision of the Lamb in Revelation.',
     scripture: 'John 1:29; Revelation 5:6–12',
     liturgicalText: 'Lamb of God, you take away the sins of the world, have mercy on us.',
+    link: 'https://en.wikipedia.org/wiki/Agnus_Dei',
   },
   {
     id: 'mass-19',
@@ -298,6 +316,7 @@ const massParts = [
       'The faithful receive the Body and Blood of Christ, fulfilling his command "Do this in remembrance of me." From the earliest days the Church gathered on the Lord\'s Day for the "breaking of bread," the center of Christian life.',
     scripture: 'John 6:53–56; Acts 2:42',
     liturgicalText: 'The Body of Christ. — Amen.',
+    link: 'https://en.wikipedia.org/wiki/Eucharist_in_the_Catholic_Church',
   },
 
   // ──────────────────────── CONCLUDING RITES ────────────────────────
@@ -315,6 +334,7 @@ const massParts = [
       'The priest blesses the assembly in the name of the Holy Trinity, continuing the ancient priestly blessing of Israel. The People of God are sent forth strengthened by Word and Sacrament.',
     scripture: 'Numbers 6:24–26',
     liturgicalText: 'May almighty God bless you, the Father, and the Son, and the Holy Spirit.',
+    link: 'https://en.wikipedia.org/wiki/Priestly_blessing',
   },
   {
     id: 'mass-21',
@@ -330,6 +350,7 @@ const massParts = [
       'The Latin dismissal "Ite, missa est" — "Go, you are sent" — gives the Mass its very name. It is not merely an ending but a commissioning: the faithful are sent into the world to live what they have celebrated.',
     scripture: 'Matthew 28:19–20',
     liturgicalText: 'Go forth, the Mass is ended. — Thanks be to God.',
+    link: 'https://en.wikipedia.org/wiki/Ite,_missa_est',
   },
 ]
 

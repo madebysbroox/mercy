@@ -134,3 +134,71 @@
   padding-left: 0.6rem;
   border-left: 2px solid rgba(255, 255, 255, 0.1);
 }
+
+/* ── "more…" link and hover preview ── */
+
+.info-panel-more-wrap {
+  position: relative;
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.info-panel-more {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.info-panel-more:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.info-panel-link-preview {
+  position: absolute;
+  bottom: calc(100% + 0.35rem);
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(22, 22, 34, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.4rem 0.65rem;
+  white-space: nowrap;
+  max-width: calc(100vw - 4rem);
+  animation: preview-in 0.15s ease-out;
+  pointer-events: none;
+}
+
+@keyframes preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-panel-link-favicon {
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.info-panel-link-url {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

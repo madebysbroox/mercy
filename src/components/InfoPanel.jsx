@@ -1,9 +1,53 @@
+import { useState } from 'react'
 import { categoryColors } from '../data/jesusLocations'
 import { massPartColors } from '../data/massData'
 import { eraColors } from '../data/spreadData'
 import './InfoPanel.css'
 
 const MARIAN_ACCENT = '#6ba4c9'
+
+function cleanUrl(url) {
+  try {
+    const u = new URL(url)
+    const path = u.pathname.replace(/\/$/, '')
+    return u.host + decodeURIComponent(path)
+  } catch {
+    return url
+  }
+}
+
+function MoreLink({ link }) {
+  const [hovered, setHovered] = useState(false)
+  if (!link) return null
+  return (
+    <div
+      className="info-panel-more-wrap"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="info-panel-more"
+      >
+        more&hellip;
+      </a>
+      {hovered && (
+        <div className="info-panel-link-preview">
+          <img
+            className="info-panel-link-favicon"
+            src={`https://www.google.com/s2/favicons?sz=32&domain=${new URL(link).hostname}`}
+            alt=""
+            width="16"
+            height="16"
+          />
+          <span className="info-panel-link-url">{cleanUrl(link)}</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function InfoPanel({ location, layer, onClose }) {
   if (!location) return null
@@ -31,6 +75,7 @@ function InfoPanel({ location, layer, onClose }) {
             <p className="info-panel-scripture">{location.scripture}</p>
           )}
         </div>
+        <MoreLink link={location.link} />
       </div>
     )
   }
@@ -53,6 +98,7 @@ function InfoPanel({ location, layer, onClose }) {
         <p className="info-panel-description">{location.description}</p>
         <p className="info-panel-liturgical">{location.liturgicalText}</p>
         <p className="info-panel-scripture">{location.scripture}</p>
+        <MoreLink link={location.link} />
       </div>
     )
   }
@@ -72,6 +118,7 @@ function InfoPanel({ location, layer, onClose }) {
           <p className="info-panel-visionary">{location.visionary}</p>
           <p className="info-panel-approval">{location.approval}</p>
         </div>
+        <MoreLink link={location.link} />
       </div>
     )
   }
@@ -89,6 +136,7 @@ function InfoPanel({ location, layer, onClose }) {
       <h2 className="info-panel-title">{location.name}</h2>
       <p className="info-panel-description">{location.description}</p>
       <p className="info-panel-scripture">{location.scripture}</p>
+      <MoreLink link={location.link} />
     </div>
   )
 }
