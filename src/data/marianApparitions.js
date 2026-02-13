@@ -15,7 +15,7 @@ const apparitions = [
     description:
       'According to ancient tradition, the Blessed Virgin appeared to the Apostle James while he was preaching in Spain, standing atop a pillar of jasper. She encouraged him in his mission and left the pillar as a sign of her presence.',
     approval: 'Ancient tradition; venerated since the early Church',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_the_Pillar',
+    link: 'https://www.vatican.va/content/benedict-xvi/en/letters/2005/documents/hf_ben-xvi_let_20050519_pellegr-saragozza.html',
   },
   {
     id: 'ma-2',
@@ -45,7 +45,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to the indigenous peasant Juan Diego on Tepeyac Hill, leaving her miraculous image imprinted on his tilma. The apparition led to the conversion of millions throughout the Americas.',
     approval: 'Approved by Archbishop Zumárraga (1531); feast day December 12',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Guadalupe',
+    link: 'https://www.wordonfire.org/guadalupe/',
   },
   {
     id: 'ma-4',
@@ -105,7 +105,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared weeping to two shepherd children on a mountainside, lamenting offenses against her Son and calling for prayer, penance, and observance of the Lord\'s Day.',
     approval: 'Approved by Bishop de Bruillard of Grenoble (1851)',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_La_Salette',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/speeches/2000/apr-jun/documents/hf_jp-ii_spe_20000504_notre-dame.html',
   },
   {
     id: 'ma-8',
@@ -120,7 +120,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared eighteen times to the young Bernadette in the grotto of Massabielle, declaring "I am the Immaculate Conception" and calling for prayer and penance. A miraculous spring began to flow.',
     approval: 'Approved by Bishop Laurence of Tarbes (1862); feast day February 11',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Lourdes',
+    link: 'https://www.wordonfire.org/articles/10-things-to-know-about-our-lady-of-lourdes-and-st-bernadette/',
   },
   {
     id: 'ma-9',
@@ -165,7 +165,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared silently at the south gable of the parish church, accompanied by St. Joseph, St. John the Evangelist, and a Lamb on an altar. Fifteen villagers witnessed the apparition in the rain for two hours.',
     approval: 'Approved by Archbishop McHale of Tuam (1879); papal visit by John Paul II (1979)',
-    link: 'https://en.wikipedia.org/wiki/Knock_Shrine',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/homilies/1979/documents/hf_jp-ii_hom_19790930_irlanda-knock.html',
   },
   {
     id: 'ma-12',
@@ -180,7 +180,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared six times to three shepherd children in the Cova da Iria, asking for prayer of the Rosary, penance, and consecration of Russia. The Miracle of the Sun was witnessed by tens of thousands on October 13.',
     approval: 'Approved by Bishop da Silva of Leiria (1930); feast day May 13',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_F%C3%A1tima',
+    link: 'https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_con_cfaith_doc_20000626_message-fatima_en.html',
   },
   {
     id: 'ma-13',
@@ -210,7 +210,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared eight times to the young girl Mariette Beco in the garden of her family\'s home, leading her to a spring and declaring, "I am the Virgin of the Poor." She asked for a small chapel.',
     approval: 'Approved by Bishop Kerkhofs of Liège (1949)',
-    link: 'https://en.wikipedia.org/wiki/Banneux',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/letters/1999/documents/hf_jp-ii_let_19990731_banneux.html',
   },
   {
     id: 'ma-15',
@@ -270,7 +270,7 @@ const apparitions = [
     description:
       'The Blessed Virgin appeared to three young students, showing them terrifying visions that would be understood as foretelling the 1994 Rwandan genocide. She called the world to prayer, fasting, and conversion of heart.',
     approval: 'Approved by Bishop Misago of Gikongoro (2001)',
-    link: 'https://en.wikipedia.org/wiki/Kibeho_apparitions',
+    link: 'https://www.vatican.va/content/francesco/en/speeches/2014/april/documents/papa-francesco_20140403_ad-limina-rwanda.html',
   },
   {
     id: 'ma-19',

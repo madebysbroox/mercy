@@ -26,7 +26,7 @@ const spreadEvents = [
       'The Holy Spirit descends upon the Apostles in the Upper Room. Peter preaches and three thousand are baptized. The Church is born and begins to spread from Jerusalem.',
     keyFigure: 'The Apostles',
     scripture: 'Acts 2:1–41',
-    link: 'https://en.wikipedia.org/wiki/Pentecost',
+    link: 'https://www.wordonfire.org/topics/pentecost/',
   },
   {
     id: 'sp-02',
@@ -42,7 +42,7 @@ const spreadEvents = [
       'Believers fleeing persecution in Jerusalem preach to Greeks in Antioch. It is here that disciples are first called "Christians." Antioch becomes the launchpad for Paul\'s missionary journeys.',
     keyFigure: 'Sts. Paul & Barnabas',
     scripture: 'Acts 11:19–26',
-    link: 'https://en.wikipedia.org/wiki/Church_of_Antioch',
+    link: 'https://www.wordonfire.org/articles/igneous-saint/',
   },
   {
     id: 'sp-03',
@@ -90,7 +90,7 @@ const spreadEvents = [
       'Both Peter and Paul bring the Gospel to the heart of the Roman Empire. Their martyrdom under Nero consecrates Rome as the center of the Western Church and the See of Peter.',
     keyFigure: 'Sts. Peter & Paul',
     scripture: 'Romans 1:7–15',
-    link: 'https://en.wikipedia.org/wiki/Saint_Peter',
+    link: 'https://www.wordonfire.org/articles/barron/a-prayer-at-the-tomb-of-st-paul/',
   },
   {
     id: 'sp-06',
@@ -106,7 +106,7 @@ const spreadEvents = [
       'According to strong tradition, the Apostle Thomas traveled to the Malabar Coast, establishing Christian communities that endure to this day as the Syro-Malabar and Syro-Malankara Churches — among the oldest in the world.',
     keyFigure: 'St. Thomas the Apostle',
     scripture: 'John 20:24–29',
-    link: 'https://en.wikipedia.org/wiki/Saint_Thomas_Christians',
+    link: 'https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060927.html',
   },
   {
     id: 'sp-07',
@@ -122,7 +122,7 @@ const spreadEvents = [
       'The evangelist Mark founds the Church in Alexandria, which becomes one of the great patriarchates and a center of Christian theology. The Catechetical School of Alexandria produces Clement and Origen.',
     keyFigure: 'St. Mark the Evangelist',
     scripture: 'Mark 16:15',
-    link: 'https://en.wikipedia.org/wiki/Mark_the_Evangelist',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/audiences/2000/documents/hf_jp-ii_aud_20000301.html',
   },
 
   // ──────────────────────── ROMAN EMPIRE ERA ────────────────────────
@@ -139,7 +139,7 @@ const spreadEvents = [
     description:
       'The martyrs of Lyon and Vienne, including the slave girl Blandina, bear witness under brutal persecution. Their bishop Irenaeus, a disciple of Polycarp who knew the Apostle John, becomes a pillar of orthodox theology.',
     keyFigure: 'St. Irenaeus of Lyon',
-    link: 'https://en.wikipedia.org/wiki/Irenaeus',
+    link: 'https://www.wordonfire.org/articles/barron/st-irenaeus-and-the-god-who-doesnt-need-us-2023/',
   },
   {
     id: 'sp-09',
@@ -154,7 +154,7 @@ const spreadEvents = [
     description:
       'North Africa becomes a powerhouse of Latin Christianity. Tertullian writes the first major theological works in Latin; later, Cyprian as bishop and Augustine of nearby Hippo shape Western theology for centuries.',
     keyFigure: 'Tertullian, St. Cyprian, St. Augustine',
-    link: 'https://en.wikipedia.org/wiki/Christianity_in_Africa#North_Africa',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/apost_exhortations/documents/hf_jp-ii_exh_14091995_ecclesia-in-africa.html',
   },
   {
     id: 'sp-10',
@@ -169,7 +169,7 @@ const spreadEvents = [
     description:
       'King Tiridates III is baptized by Gregory the Illuminator, making Armenia the first nation to adopt Christianity as its state religion — even before the Roman Empire.',
     keyFigure: 'St. Gregory the Illuminator',
-    link: 'https://en.wikipedia.org/wiki/Armenian_Apostolic_Church',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/apost_letters/2001/documents/hf_jp-ii_apl_20010217_battesimo-armenia.html',
   },
   {
     id: 'sp-11',
@@ -199,7 +199,7 @@ const spreadEvents = [
     description:
       'King Ezana of Axum converts to Christianity through the influence of Frumentius, who is consecrated the first bishop of Ethiopia by Athanasius of Alexandria. The Ethiopian Orthodox Church traces its roots to this moment.',
     keyFigure: 'St. Frumentius',
-    link: 'https://en.wikipedia.org/wiki/Ethiopian_Orthodox_Tewahedo_Church',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/speeches/1993/june/documents/hf_jp-ii_spe_19930611_chiesa-etiopia.html',
   },
   {
     id: 'sp-13',
@@ -214,7 +214,7 @@ const spreadEvents = [
     description:
       'St. Nino, a captive woman from Cappadocia, converts King Mirian III and Queen Nana of Iberia (Georgia). The Georgian Orthodox Church is one of the oldest Christian communities in the world.',
     keyFigure: 'St. Nino',
-    link: 'https://en.wikipedia.org/wiki/Nino_(saint)',
+    link: 'https://www.vatican.va/content/francesco/en/speeches/2016/september/documents/papa-francesco_20160930_georgia-autorita-tbilisi.html',
   },
 
   // ──────────────────────── MEDIEVAL EXPANSION ────────────────────────
@@ -231,7 +231,7 @@ const spreadEvents = [
     description:
       'St. Patrick, a former slave, returns to Ireland as a bishop and missionary. Within a generation, Ireland is transformed into a center of Christian learning that will later re-evangelize much of Europe.',
     keyFigure: 'St. Patrick',
-    link: 'https://en.wikipedia.org/wiki/Saint_Patrick',
+    link: 'https://www.wordonfire.org/articles/st-patrick-and-why-mission-matters/',
   },
   {
     id: 'sp-15',
@@ -246,7 +246,7 @@ const spreadEvents = [
     description:
       'King Clovis I of the Franks is baptized by St. Remigius, bringing the most powerful Germanic kingdom into Catholic Christianity. France becomes "the eldest daughter of the Church."',
     keyFigure: 'St. Remigius',
-    link: 'https://en.wikipedia.org/wiki/Clovis_I#Conversion_to_Catholicism',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/speeches/1996/september/documents/hf_jp-ii_spe_19960919_presidente-francia.html',
   },
   {
     id: 'sp-16',
@@ -261,7 +261,7 @@ const spreadEvents = [
     description:
       'Pope Gregory the Great sends Augustine and forty monks to the Anglo-Saxons. King Ethelbert of Kent converts, and Canterbury becomes the mother church of English Christianity.',
     keyFigure: 'St. Augustine of Canterbury',
-    link: 'https://en.wikipedia.org/wiki/Augustine_of_Canterbury',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/homilies/1982/documents/hf_jp-ii_hom_19820529_canterbury.html',
   },
   {
     id: 'sp-17',
@@ -276,7 +276,7 @@ const spreadEvents = [
     description:
       'Grand Prince Vladimir of Kyiv receives baptism and orders the baptism of his people in the Dnieper River. Christianity spreads across the vast lands of Kievan Rus\', shaping the civilization of Eastern Europe.',
     keyFigure: 'St. Vladimir the Great',
-    link: 'https://en.wikipedia.org/wiki/Baptism_of_Kyiv',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/homilies/2001/documents/hf_jp-ii_hom_20010624_ucraina.html',
   },
   {
     id: 'sp-18',
@@ -291,7 +291,7 @@ const spreadEvents = [
     description:
       'Norway, Denmark, Iceland, and Sweden gradually embrace Christianity between the 10th and 12th centuries. The Nidaros Cathedral at Trondheim becomes the northernmost major pilgrimage site in Christendom.',
     keyFigure: 'St. Olaf of Norway',
-    link: 'https://en.wikipedia.org/wiki/Christianization_of_Scandinavia',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/homilies/1989/documents/hf_jp-ii_hom_19890610_vadstena.html',
   },
   {
     id: 'sp-19',
@@ -306,7 +306,7 @@ const spreadEvents = [
     description:
       'Grand Duke Jogaila is baptized and Lithuania, the last pagan state in Europe, officially becomes Catholic. The baptism unites Lithuania and Poland in a personal union that will endure for centuries.',
     keyFigure: 'King Władysław II Jagiełło',
-    link: 'https://en.wikipedia.org/wiki/Christianization_of_Lithuania',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/apost_letters/1987/documents/hf_jp-ii_apl_05061987_sescentesima-anniversaria.html',
   },
 
   // ──────────────────────── AGE OF EXPLORATION ────────────────────────
@@ -323,7 +323,7 @@ const spreadEvents = [
     description:
       'Following the apparition of Our Lady of Guadalupe to Juan Diego, nine million indigenous people are baptized within a decade. Latin America becomes the most Catholic continent on earth.',
     keyFigure: 'St. Juan Diego',
-    link: 'https://en.wikipedia.org/wiki/Our_Lady_of_Guadalupe',
+    link: 'https://www.wordonfire.org/articles/juan-diegos-proof-of-mary-amid-the-aztecs/',
   },
   {
     id: 'sp-21',
@@ -338,7 +338,7 @@ const spreadEvents = [
     description:
       'The Jesuit missionary Francis Xavier arrives in Kagoshima and begins evangelizing Japan. Within decades there are hundreds of thousands of Japanese Christians — a community that will endure even through centuries of persecution.',
     keyFigure: 'St. Francis Xavier',
-    link: 'https://en.wikipedia.org/wiki/Francis_Xavier',
+    link: 'https://www.wordonfire.org/articles/st-francis-xavier-and-our-waning-zeal-for-souls/',
   },
   {
     id: 'sp-22',
@@ -353,7 +353,7 @@ const spreadEvents = [
     description:
       'Magellan\'s expedition plants the cross in Cebu and baptizes Chief Humabon and hundreds of islanders. The Philippines becomes the only predominantly Catholic nation in Asia, a faith deeply woven into Filipino identity.',
     keyFigure: 'Ferdinand Magellan',
-    link: 'https://en.wikipedia.org/wiki/Christianity_in_the_Philippines',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/speeches/1981/february/documents/hf_jp-ii_spe_19810217_manila-presidente.html',
   },
   {
     id: 'sp-23',
@@ -383,7 +383,7 @@ const spreadEvents = [
     description:
       'The Jesuit Matteo Ricci gains access to the imperial court in Beijing, pioneering a mission of inculturation — presenting Christianity through Chinese philosophical categories and earning the respect of scholars.',
     keyFigure: 'Matteo Ricci, S.J.',
-    link: 'https://en.wikipedia.org/wiki/Matteo_Ricci',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/speeches/2001/october/documents/hf_jp-ii_spe_20011024_matteo-ricci.html',
   },
 
   // ──────────────────────── MODERN MISSIONS ────────────────────────
@@ -400,7 +400,7 @@ const spreadEvents = [
     description:
       'Uniquely in Church history, Korean Catholicism is founded not by foreign missionaries but by lay scholars who discovered the faith through Chinese texts. Over 10,000 martyrs bear witness during waves of persecution.',
     keyFigure: 'St. Andrew Kim Taegon & companions',
-    link: 'https://en.wikipedia.org/wiki/Korean_Martyrs',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/homilies/1984/documents/hf_jp-ii_hom_19840506_martiri-coreani.html',
   },
   {
     id: 'sp-26',
@@ -430,7 +430,7 @@ const spreadEvents = [
     description:
       'Twenty-two Catholic and twenty-three Anglican converts are martyred on the orders of Kabaka Mwanga II. Their witness ignites the faith in East Africa; today Uganda is one of the most Christian nations on the continent.',
     keyFigure: 'St. Charles Lwanga & companions',
-    link: 'https://en.wikipedia.org/wiki/Uganda_Martyrs',
+    link: 'https://www.wordonfire.org/articles/barron/the-fire-at-namugongo/',
   },
   {
     id: 'sp-28',
@@ -445,7 +445,7 @@ const spreadEvents = [
     description:
       'Irish convicts and settlers bring the faith to Australia; Marist and other missionaries carry it across the Pacific Islands. World Youth Day 2008 in Sydney signals Oceania\'s place in the global Church.',
     keyFigure: 'Fr. John Joseph Therry & Marist Fathers',
-    link: 'https://en.wikipedia.org/wiki/Catholic_Church_in_Australia',
+    link: 'https://www.vatican.va/content/john-paul-ii/en/apost_exhortations/documents/hf_jp-ii_exh_20011122_ecclesia-in-oceania.html',
   },
   {
     id: 'sp-29',
@@ -460,7 +460,7 @@ const spreadEvents = [
     description:
       'Alexandre de Rhodes and Jesuit missionaries bring Christianity to Vietnam, creating the Vietnamese romanized script (Quốc Ngữ) in the process. Despite centuries of persecution, Vietnam has nearly seven million Catholics today.',
     keyFigure: 'Alexandre de Rhodes, S.J.; Vietnamese Martyrs',
-    link: 'https://en.wikipedia.org/wiki/Catholic_Church_in_Vietnam',
+    link: 'https://www.vatican.va/content/benedict-xvi/en/messages/pont-messages/2009/documents/hf_ben-xvi_mes_20091117_vietnam.html',
   },
   {
     id: 'sp-30',
@@ -475,7 +475,7 @@ const spreadEvents = [
     description:
       'John Carroll is appointed the first Catholic bishop in the United States. From a small, marginalized community, American Catholicism grows through waves of immigration to become the nation\'s largest single denomination.',
     keyFigure: 'Bishop John Carroll',
-    link: 'https://en.wikipedia.org/wiki/John_Carroll_(bishop)',
+    link: 'https://www.vatican.va/content/benedict-xvi/en/speeches/2008/april/documents/hf_ben-xvi_spe_20080416_bishops-usa.html',
   },
 ]
 
