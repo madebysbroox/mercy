@@ -24,7 +24,7 @@ const massParts = [
       'The faithful mark themselves with the sign of the Cross, invoking the Holy Trinity. Early Christians in Jerusalem traced the cross on their foreheads; Tertullian attests to the practice by AD 200.',
     scripture: 'Matthew 28:19',
     liturgicalText: 'In the name of the Father, and of the Son, and of the Holy Spirit.',
-    link: 'https://en.wikipedia.org/wiki/Sign_of_the_cross',
+    link: 'https://www.wordonfire.org/articles/contributors/a-short-history-of-the-sign-of-the-cross/',
   },
   {
     id: 'mass-02',
@@ -56,7 +56,7 @@ const massParts = [
       'The ancient Greek cry "Lord, have mercy" entered Christian worship from the Eastern liturgical tradition. It is one of the few Greek phrases preserved in the Latin Mass, a bridge between East and West.',
     scripture: 'Mark 10:47',
     liturgicalText: 'Kyrie, eleison. Christe, eleison. Kyrie, eleison.',
-    link: 'https://en.wikipedia.org/wiki/Kyrie',
+    link: 'https://www.wordonfire.org/articles/kyrie-eleison/',
   },
   {
     id: 'mass-04',
@@ -90,7 +90,7 @@ const massParts = [
       'The reading of the Hebrew Scriptures in Christian worship continues the synagogue practice that Jesus himself participated in. The early Church preserved this link to salvation history as the foundation for understanding the Gospel.',
     scripture: 'Luke 4:16–21',
     liturgicalText: 'The Word of the Lord. — Thanks be to God.',
-    link: 'https://en.wikipedia.org/wiki/Liturgy_of_the_Word',
+    link: 'https://www.wordonfire.org/videos/sermons/reading-the-new-testament-in-light-of-the-old/',
   },
   {
     id: 'mass-06',
@@ -106,7 +106,7 @@ const massParts = [
       'The Psalms of David, sung antiphonally in the Temple, became the prayer book of the Church. The congregation\'s sung response to the lector carries forward three thousand years of worship in the same words.',
     scripture: 'Psalm 150',
     liturgicalText: 'The response varies with the liturgical season.',
-    link: 'https://en.wikipedia.org/wiki/Responsorial_psalm',
+    link: 'https://www.wordonfire.org/articles/barron/the-psalms-the-churchs-song-book/',
   },
   {
     id: 'mass-07',
@@ -170,7 +170,7 @@ const massParts = [
       'Following the Jewish synagogue tradition, the early Church included an explanation of the Scriptures. The great homilists of Antioch — Ignatius, John Chrysostom — shaped this tradition of breaking open the Word for the assembly.',
     scripture: 'Nehemiah 8:8',
     liturgicalText: 'No fixed text — the homilist speaks from the readings of the day.',
-    link: 'https://en.wikipedia.org/wiki/Homily',
+    link: 'https://www.wordonfire.org/articles/8-elements-of-a-phenomenal-homily/',
   },
   {
     id: 'mass-11',
@@ -186,7 +186,7 @@ const massParts = [
       'The profession of faith formulated at the Councils of Nicaea (325) and Constantinople (381) in response to heresies. The entire congregation professes the core truths of the faith together, a living link to the early Church Fathers.',
     scripture: '1 Corinthians 15:3–5',
     liturgicalText: 'I believe in one God, the Father almighty, maker of heaven and earth…',
-    link: 'https://en.wikipedia.org/wiki/Nicene_Creed',
+    link: 'https://www.wordonfire.org/articles/barron/the-eloquent-ambiguity-of-i-believe/',
   },
   {
     id: 'mass-12',
@@ -202,7 +202,7 @@ const massParts = [
       'The baptized exercise their priestly office by interceding for the Church and the world. Justin Martyr describes this practice in Rome around AD 155: after the readings, "we offer prayers in common for ourselves and for all others."',
     scripture: '1 Timothy 2:1–2',
     liturgicalText: 'Lord, hear our prayer.',
-    link: 'https://en.wikipedia.org/wiki/Prayer_of_the_Faithful',
+    link: 'https://www.wordonfire.org/articles/praying-for-the-world-on-good-friday/',
   },
 
   // ──────────────────────── LITURGY OF THE EUCHARIST ────────────────────────
@@ -220,7 +220,7 @@ const massParts = [
       'Bread and wine are brought to the altar, echoing both the Temple offerings and Melchizedek\'s offering of bread and wine. The prayers "Blessed are you, Lord God of all creation" derive from ancient Jewish blessings (berakot).',
     scripture: 'Genesis 14:18; Hebrews 7:1–3',
     liturgicalText: 'Blessed are you, Lord God of all creation, for through your goodness we have received the bread we offer you…',
-    link: 'https://en.wikipedia.org/wiki/Offertory',
+    link: 'https://www.wordonfire.org/articles/at-the-offertory-therefore/',
   },
   {
     id: 'mass-14',
@@ -252,7 +252,7 @@ const massParts = [
       'The summit of the Mass: the priest speaks Christ\'s own words over the bread and wine — "This is my Body… This is the chalice of my Blood." The sacrifice of Calvary is made present on the altar. The Church has faithfully repeated these words since the Last Supper.',
     scripture: 'Luke 22:19–20; 1 Corinthians 11:23–26',
     liturgicalText: 'Take this, all of you, and eat of it, for this is my Body, which will be given up for you.',
-    link: 'https://en.wikipedia.org/wiki/Eucharistic_Prayer',
+    link: 'https://www.wordonfire.org/articles/the-eucharist-as-thanksgiving/',
   },
   {
     id: 'mass-16',
@@ -268,7 +268,7 @@ const massParts = [
       'The prayer that Jesus himself taught his disciples. The Didache (c. AD 90) instructs Christians to pray it three times daily. In the Mass it prepares the faithful for Communion — "Give us this day our daily bread."',
     scripture: 'Matthew 6:9–13',
     liturgicalText: 'Our Father, who art in heaven, hallowed be thy name…',
-    link: 'https://en.wikipedia.org/wiki/Lord%27s_Prayer',
+    link: 'https://www.wordonfire.org/videos/sermons/what-is-the-lords-prayer-about/',
   },
   {
     id: 'mass-17',
@@ -300,7 +300,7 @@ const massParts = [
       'Pope Sergius I — of Syrian origin — introduced the singing of "Lamb of God" during the fraction rite around AD 700. The chant echoes the words of John the Baptist and the vision of the Lamb in Revelation.',
     scripture: 'John 1:29; Revelation 5:6–12',
     liturgicalText: 'Lamb of God, you take away the sins of the world, have mercy on us.',
-    link: 'https://en.wikipedia.org/wiki/Agnus_Dei',
+    link: 'https://www.wordonfire.org/videos/sermons/behold-the-lamb-of-god/',
   },
   {
     id: 'mass-19',
@@ -316,7 +316,7 @@ const massParts = [
       'The faithful receive the Body and Blood of Christ, fulfilling his command "Do this in remembrance of me." From the earliest days the Church gathered on the Lord\'s Day for the "breaking of bread," the center of Christian life.',
     scripture: 'John 6:53–56; Acts 2:42',
     liturgicalText: 'The Body of Christ. — Amen.',
-    link: 'https://en.wikipedia.org/wiki/Eucharist_in_the_Catholic_Church',
+    link: 'https://www.wordonfire.org/presence/',
   },
 
   // ──────────────────────── CONCLUDING RITES ────────────────────────
