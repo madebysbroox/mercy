@@ -130,6 +130,7 @@ function App() {
   const popupRef = useRef(null)
   const rotationRef = useRef(null)
   const userInteractingRef = useRef(false)
+  const hasZoomedRef = useRef(false)
   const resumeTimeoutRef = useRef(null)
   const travelerRafRef = useRef(null)
 
@@ -179,6 +180,7 @@ function App() {
               'raster-brightness-max': 0.35,
               'raster-contrast': 0.2,
               'raster-saturation': -0.5,
+              'raster-fade-duration': 300,
             },
           },
         ],
@@ -209,6 +211,7 @@ function App() {
       map.addSource('points', {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: [] },
+        buffer: 512,
       })
       map.addLayer({
         id: 'points-glow',
@@ -259,6 +262,7 @@ function App() {
       map.addSource('selected-ring', {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: [] },
+        buffer: 512,
       })
       map.addLayer({
         id: 'selected-ring-layer',
@@ -277,6 +281,7 @@ function App() {
       map.addSource('traveler', {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: [] },
+        buffer: 512,
       })
       map.addLayer({
         id: 'traveler-glow',
@@ -341,7 +346,7 @@ function App() {
 
     // Auto-rotation
     function spinGlobe() {
-      if (!userInteractingRef.current && map) {
+      if (!userInteractingRef.current && !hasZoomedRef.current && map) {
         const center = map.getCenter()
         center.lng += 0.01
         map.easeTo({ center, duration: 50, easing: (t) => t })
@@ -354,6 +359,14 @@ function App() {
     map.on('touchstart', () => { userInteractingRef.current = true })
     map.on('dragstart', () => { userInteractingRef.current = true })
 
+    // Stop spinning permanently when user zooms (originalEvent distinguishes
+    // user-initiated zoom from programmatic flyTo/easeTo zoom)
+    map.on('zoomstart', (e) => {
+      if (e.originalEvent) {
+        hasZoomedRef.current = true
+      }
+    })
+
     const resumeRotation = () => {
       clearTimeout(resumeTimeoutRef.current)
       resumeTimeoutRef.current = setTimeout(() => {
@@ -363,7 +376,6 @@ function App() {
     map.on('mouseup', resumeRotation)
     map.on('touchend', resumeRotation)
     map.on('dragend', resumeRotation)
-    map.on('zoomend', resumeRotation)
 
     return () => {
       cancelAnimationFrame(rotationRef.current)
@@ -495,6 +507,7 @@ function App() {
     (layer) => {
       setActiveLayer(layer)
       setSelected(null)
+      hasZoomedRef.current = false
 
       if (popupRef.current) {
         popupRef.current.remove()
