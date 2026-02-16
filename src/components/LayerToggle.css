@@ -41,6 +41,28 @@
   border-color: rgba(255, 255, 255, 0.18);
 }
 
+.layer-toggle-btn.transitioning {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.layer-toggle-btn.transitioning.active {
+  background: rgba(14, 14, 22, 0.9);
+  animation: transition-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes transition-pulse {
+  0%, 100% { 
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+  50% { 
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+  }
+}
+
 .layer-toggle-icon {
   font-size: 1rem;
   line-height: 1;

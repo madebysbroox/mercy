@@ -7,16 +7,17 @@ const layers = [
   { id: 'spread', label: 'Spread of Christianity', icon: '🌍' },
 ]
 
-function LayerToggle({ activeLayer, onLayerChange }) {
+function LayerToggle({ activeLayer, onLayerChange, transitioning = false }) {
   return (
     <nav className="layer-toggle" aria-label="Data layers">
       {layers.map((layer) => (
         <button
           key={layer.id}
-          className={`layer-toggle-btn ${activeLayer === layer.id ? 'active' : ''}`}
+          className={`layer-toggle-btn ${activeLayer === layer.id ? 'active' : ''} ${transitioning ? 'transitioning' : ''}`}
           onClick={() => onLayerChange(layer.id)}
           aria-pressed={activeLayer === layer.id}
           title={layer.label}
+          disabled={transitioning}
         >
           <span className="layer-toggle-icon">{layer.icon}</span>
           <span className="layer-toggle-label">{layer.label}</span>
