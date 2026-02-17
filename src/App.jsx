@@ -258,7 +258,7 @@ function App() {
         paint: {
           'circle-radius': 12,
           'circle-color': ['get', '_color'],
-          'circle-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.15],
+          'circle-opacity': ['*', ['coalesce', ['get', '_opacity'], 1], 0.15],
           'circle-blur': 1,
         },
       })
@@ -269,10 +269,10 @@ function App() {
         paint: {
           'circle-radius': 5,
           'circle-color': ['get', '_color'],
-          'circle-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.9],
+          'circle-opacity': ['*', ['coalesce', ['get', '_opacity'], 1], 0.9],
           'circle-stroke-width': 1.5,
           'circle-stroke-color': 'rgba(255,255,255,0.25)',
-          'circle-stroke-opacity': ['get', '_opacity', ['literal', {}], 1],
+          'circle-stroke-opacity': ['coalesce', ['get', '_opacity'], 1],
         },
       })
 
@@ -287,7 +287,7 @@ function App() {
         source: 'arcs',
         paint: {
           'line-color': ['get', '_color'],
-          'line-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.4],
+          'line-opacity': ['*', ['coalesce', ['get', '_opacity'], 1], 0.4],
           'line-width': 1.5,
           'line-dasharray': [2, 2],
         },
