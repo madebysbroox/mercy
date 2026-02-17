@@ -19,6 +19,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 150,
     century: '2nd century',
     description:
       'The faithful mark themselves with the sign of the Cross, invoking the Holy Trinity. Early Christians in Jerusalem traced the cross on their foreheads; Tertullian attests to the practice by AD 200.',
@@ -35,6 +36,7 @@ const massParts = [
     lat: 41.9028,
     lng: 12.4964,
     origin: 'Rome',
+    year: 1050,
     century: '11th century',
     description:
       'The congregation acknowledges their sinfulness and asks for God\'s mercy. The Confiteor ("I confess") was formalized in the Roman liturgy during the medieval period, though penitential prayers opened worship from the earliest centuries.',
@@ -51,6 +53,7 @@ const massParts = [
     lat: 41.0082,
     lng: 28.9784,
     origin: 'Constantinople',
+    year: 350,
     century: '4th century',
     description:
       'The ancient Greek cry "Lord, have mercy" entered Christian worship from the Eastern liturgical tradition. It is one of the few Greek phrases preserved in the Latin Mass, a bridge between East and West.',
@@ -67,6 +70,7 @@ const massParts = [
     lat: 31.7300,
     lng: 35.1994,
     origin: 'Bethlehem / Rome',
+    year: 300,
     century: '2nd–4th century',
     description:
       'The "Great Doxology" begins with the angels\' hymn at Christ\'s birth. Originally a morning prayer in the East, it was introduced into the Roman Mass by Pope Symmachus around AD 500, initially only for bishops on feast days.',
@@ -85,6 +89,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 50,
     century: 'Apostolic era',
     description:
       'The reading of the Hebrew Scriptures in Christian worship continues the synagogue practice that Jesus himself participated in. The early Church preserved this link to salvation history as the foundation for understanding the Gospel.',
@@ -101,6 +106,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 50,
     century: 'Temple period',
     description:
       'The Psalms of David, sung antiphonally in the Temple, became the prayer book of the Church. The congregation\'s sung response to the lector carries forward three thousand years of worship in the same words.',
@@ -117,6 +123,7 @@ const massParts = [
     lat: 37.9392,
     lng: 22.9319,
     origin: 'Corinth / Apostolic Churches',
+    year: 50,
     century: '1st century',
     description:
       'Paul\'s letters were read aloud in the assemblies to which they were sent, and then circulated among other churches. This practice of public reading of apostolic writings became a fixed part of the liturgy by the 2nd century.',
@@ -133,6 +140,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 100,
     century: 'Ancient',
     description:
       '"Alleluia" — Praise the Lord — is a Hebrew liturgical acclamation from Temple worship. The congregation stands and sings it to greet the proclamation of the Gospel, acknowledging the presence of Christ in his Word.',
@@ -149,6 +157,7 @@ const massParts = [
     lat: 32.8831,
     lng: 35.4961,
     origin: 'Galilee / Holy Land',
+    year: 50,
     century: '1st century',
     description:
       'The highpoint of the Liturgy of the Word: the deacon or priest proclaims the words and deeds of Jesus from the four Gospels. The assembly stands in reverence, as the living voice of Christ speaks to his Church.',
@@ -165,6 +174,7 @@ const massParts = [
     lat: 36.2028,
     lng: 36.1500,
     origin: 'Antioch',
+    year: 50,
     century: '1st century',
     description:
       'Following the Jewish synagogue tradition, the early Church included an explanation of the Scriptures. The great homilists of Antioch — Ignatius, John Chrysostom — shaped this tradition of breaking open the Word for the assembly.',
@@ -181,6 +191,7 @@ const massParts = [
     lat: 40.4293,
     lng: 29.7213,
     origin: 'Nicaea / Constantinople',
+    year: 325,
     century: 'AD 325 / 381',
     description:
       'The profession of faith formulated at the Councils of Nicaea (325) and Constantinople (381) in response to heresies. The entire congregation professes the core truths of the faith together, a living link to the early Church Fathers.',
@@ -197,6 +208,7 @@ const massParts = [
     lat: 41.9028,
     lng: 12.4964,
     origin: 'Rome / Antioch',
+    year: 155,
     century: '2nd century',
     description:
       'The baptized exercise their priestly office by interceding for the Church and the world. Justin Martyr describes this practice in Rome around AD 155: after the readings, "we offer prayers in common for ourselves and for all others."',
@@ -215,6 +227,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 50,
     century: '1st century',
     description:
       'Bread and wine are brought to the altar, echoing both the Temple offerings and Melchizedek\'s offering of bread and wine. The prayers "Blessed are you, Lord God of all creation" derive from ancient Jewish blessings (berakot).',
@@ -231,6 +244,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem / Rome',
+    year: 250,
     century: '1st–4th century',
     description:
       'The Preface is a solemn prayer of thanksgiving leading to the Sanctus — "Holy, Holy, Holy" — drawn from Isaiah\'s vision of the heavenly liturgy in the Temple. Earth joins the worship of the angels and saints.',
@@ -247,6 +261,7 @@ const massParts = [
     lat: 31.7718,
     lng: 35.2280,
     origin: 'Jerusalem — the Upper Room',
+    year: 33,
     century: 'AD 33',
     description:
       'The summit of the Mass: the priest speaks Christ\'s own words over the bread and wine — "This is my Body… This is the chalice of my Blood." The sacrifice of Calvary is made present on the altar. The Church has faithfully repeated these words since the Last Supper.',
@@ -263,6 +278,7 @@ const massParts = [
     lat: 32.8831,
     lng: 35.4961,
     origin: 'Galilee',
+    year: 30,
     century: 'Ministry of Jesus',
     description:
       'The prayer that Jesus himself taught his disciples. The Didache (c. AD 90) instructs Christians to pray it three times daily. In the Mass it prepares the faithful for Communion — "Give us this day our daily bread."',
@@ -279,6 +295,7 @@ const massParts = [
     lat: 41.9028,
     lng: 12.4964,
     origin: 'Rome',
+    year: 150,
     century: '2nd century',
     description:
       'The faithful exchange a sign of reconciliation and charity before receiving Communion, fulfilling Christ\'s command to be reconciled before approaching the altar. Justin Martyr and Hippolytus describe this "holy kiss" in the Roman liturgy.',
@@ -295,6 +312,7 @@ const massParts = [
     lat: 41.9028,
     lng: 12.4964,
     origin: 'Rome',
+    year: 700,
     century: '7th century',
     description:
       'Pope Sergius I — of Syrian origin — introduced the singing of "Lamb of God" during the fraction rite around AD 700. The chant echoes the words of John the Baptist and the vision of the Lamb in Revelation.',
@@ -311,6 +329,7 @@ const massParts = [
     lat: 31.7718,
     lng: 35.2280,
     origin: 'Jerusalem — the Upper Room',
+    year: 33,
     century: 'AD 33',
     description:
       'The faithful receive the Body and Blood of Christ, fulfilling his command "Do this in remembrance of me." From the earliest days the Church gathered on the Lord\'s Day for the "breaking of bread," the center of Christian life.',
@@ -329,6 +348,7 @@ const massParts = [
     lat: 31.7784,
     lng: 35.2346,
     origin: 'Jerusalem',
+    year: 50,
     century: 'Apostolic era',
     description:
       'The priest blesses the assembly in the name of the Holy Trinity, continuing the ancient priestly blessing of Israel. The People of God are sent forth strengthened by Word and Sacrament.',
@@ -345,6 +365,7 @@ const massParts = [
     lat: 41.9028,
     lng: 12.4964,
     origin: 'Rome',
+    year: 450,
     century: '5th century',
     description:
       'The Latin dismissal "Ite, missa est" — "Go, you are sent" — gives the Mass its very name. It is not merely an ending but a commissioning: the faithful are sent into the world to live what they have celebrated.',

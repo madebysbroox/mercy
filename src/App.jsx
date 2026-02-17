@@ -151,6 +151,7 @@ function App() {
   const [layerTransitioning, setLayerTransitioning] = useState(false)
   const [initialLoad, setInitialLoad] = useState(true)
   const [timeRange, setTimeRange] = useState(null)
+  const prevLayerRef = useRef(null)
 
   // Compute base layer data
   const { basePointsData, arcsData } = useMemo(() => {
@@ -503,10 +504,13 @@ function App() {
     setLayerTransitioning(false)
   }, [mapReady, pointsData, arcsData, activeLayer])
 
-  // Update data when layer changes
+  // Update data when layer changes or timeline filters data
   useEffect(() => {
     const map = mapRef.current
     if (!map || !mapReady) return
+
+    const layerChanged = prevLayerRef.current !== null && prevLayerRef.current !== activeLayer
+    prevLayerRef.current = activeLayer
 
     if (initialLoad) {
       // Initial load - no animation, just set the data
@@ -517,11 +521,15 @@ function App() {
       if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(pointsData, activeLayer))
       if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(arcsData, activeLayer))
       if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
-      
+
       setInitialLoad(false)
-    } else {
-      // Use smooth transitions for subsequent layer changes
+    } else if (layerChanged) {
+      // Layer actually changed - use smooth transition animation
       animateLayerTransition(pointsData, arcsData, activeLayer)
+    } else {
+      // Only data changed (e.g., timeline filter) - update map directly without animation
+      const pointsSrc = map.getSource('points')
+      if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(pointsData, activeLayer))
     }
   }, [pointsData, arcsData, activeLayer, mapReady, animateLayerTransition, initialLoad])
 
