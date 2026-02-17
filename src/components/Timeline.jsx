@@ -35,7 +35,7 @@ function getDataYearRange(pointsData, layer) {
 const LAYER_RANGES = {
   jesus: { min: 0, max: 50, defaultMin: 0, defaultMax: 40, step: 1 },
   marian: { min: 40, max: 2030, defaultMin: 40, defaultMax: 2030, step: 10 },
-  mass: { min: 30, max: 500, defaultMin: 30, defaultMax: 500, step: 5 },
+  mass: { min: 30, max: 1100, defaultMin: 30, defaultMax: 1100, step: 10 },
   spread: { min: 30, max: 2030, defaultMin: 30, defaultMax: 2030, step: 20 }
 }
 
