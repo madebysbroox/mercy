@@ -18,6 +18,19 @@ function Search({
   const inputRef = useRef(null)
   const resultsRef = useRef(null)
 
+  const getSubtitle = (point, layer) => {
+    switch (layer) {
+      case 'marian':
+        return `${point.location} • ${point.yearDisplay || point.year}`
+      case 'mass':
+        return `${point.sectionLabel} • ${point.origin}`
+      case 'spread':
+        return `${point.location} • ${point.yearDisplay || point.year}`
+      default:
+        return point.location || point.period || ''
+    }
+  }
+
   // Search across all layers and data types
   const searchResults = useMemo(() => {
     if (!query.trim() || query.length < 2) return []
@@ -113,19 +126,6 @@ function Search({
       })
       .slice(0, 10) // Limit results
   }, [query, activeLayer])
-
-  const getSubtitle = (point, layer) => {
-    switch (layer) {
-      case 'marian':
-        return `${point.location} • ${point.yearDisplay || point.year}`
-      case 'mass':
-        return `${point.sectionLabel} • ${point.origin}`
-      case 'spread':
-        return `${point.location} • ${point.yearDisplay || point.year}`
-      default:
-        return point.location || point.period || ''
-    }
-  }
 
   const handleInputChange = (e) => {
     setQuery(e.target.value)
