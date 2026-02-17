@@ -7,6 +7,8 @@ import { massParts, massArcs, massPartColors } from './data/massData'
 import { spreadEvents, spreadArcs, eraColors } from './data/spreadData'
 import InfoPanel from './components/InfoPanel'
 import LayerToggle from './components/LayerToggle'
+import Search from './components/Search'
+import Timeline from './components/Timeline'
 import './App.css'
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
@@ -83,21 +85,26 @@ function getTravelerColor(layer) {
   return '#c9a0dc'
 }
 
-function buildPointsGeoJSON(points, layer) {
+function buildPointsGeoJSON(points, layer, opacity = 1) {
   return {
     type: 'FeatureCollection',
-    features: points.map((d) => ({
+    features: points.map((d, index) => ({
       type: 'Feature',
       geometry: { type: 'Point', coordinates: [d.lng, d.lat] },
-      properties: { ...d, _color: getPointColor(d, layer) },
+      properties: { 
+        ...d, 
+        _color: getPointColor(d, layer),
+        _opacity: opacity,
+        _index: index
+      },
     })),
   }
 }
 
-function buildArcsGeoJSON(arcData, layer) {
+function buildArcsGeoJSON(arcData, layer, opacity = 1) {
   return {
     type: 'FeatureCollection',
-    features: arcData.map((d) => ({
+    features: arcData.map((d, index) => ({
       type: 'Feature',
       geometry: {
         type: 'LineString',
@@ -106,7 +113,11 @@ function buildArcsGeoJSON(arcData, layer) {
           [d.endLng, d.endLat],
         ],
       },
-      properties: { _color: getArcColor(d, layer) },
+      properties: { 
+        _color: getArcColor(d, layer),
+        _opacity: opacity,
+        _index: index
+      },
     })),
   }
 }
@@ -137,13 +148,39 @@ function App() {
   const [activeLayer, setActiveLayer] = useState('jesus')
   const [selected, setSelected] = useState(null)
   const [mapReady, setMapReady] = useState(false)
+  const [layerTransitioning, setLayerTransitioning] = useState(false)
+  const [initialLoad, setInitialLoad] = useState(true)
+  const [timeRange, setTimeRange] = useState(null)
 
-  // Compute layer data
-  const { pointsData, arcsData } = useMemo(() => {
-    if (activeLayer === 'marian') return { pointsData: apparitions, arcsData: marianArcs }
-    if (activeLayer === 'mass') return { pointsData: massParts, arcsData: massArcs }
-    if (activeLayer === 'spread') return { pointsData: spreadEvents, arcsData: spreadArcs }
-    return { pointsData: locations, arcsData: arcs }
+  // Compute base layer data
+  const { basePointsData, arcsData } = useMemo(() => {
+    if (activeLayer === 'marian') return { basePointsData: apparitions, arcsData: marianArcs }
+    if (activeLayer === 'mass') return { basePointsData: massParts, arcsData: massArcs }
+    if (activeLayer === 'spread') return { basePointsData: spreadEvents, arcsData: spreadArcs }
+    return { basePointsData: locations, arcsData: arcs }
+  }, [activeLayer])
+
+  // Filter data by time range
+  const pointsData = useMemo(() => {
+    if (!timeRange || !basePointsData.length) {
+      return basePointsData
+    }
+
+    const [startYear, endYear] = timeRange
+    return basePointsData.filter(point => {
+      if (!point.year || isNaN(point.year)) return true // Include items without years
+      return point.year >= startYear && point.year <= endYear
+    })
+  }, [basePointsData, timeRange])
+
+  // Handle timeline range changes
+  const handleTimeRangeChange = useCallback((newTimeRange) => {
+    setTimeRange(newTimeRange)
+  }, [])
+
+  // Reset timeline when layer changes
+  useEffect(() => {
+    setTimeRange(null)
   }, [activeLayer])
 
   // Initialize map
@@ -220,7 +257,7 @@ function App() {
         paint: {
           'circle-radius': 12,
           'circle-color': ['get', '_color'],
-          'circle-opacity': 0.15,
+          'circle-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.15],
           'circle-blur': 1,
         },
       })
@@ -231,9 +268,10 @@ function App() {
         paint: {
           'circle-radius': 5,
           'circle-color': ['get', '_color'],
-          'circle-opacity': 0.9,
+          'circle-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.9],
           'circle-stroke-width': 1.5,
           'circle-stroke-color': 'rgba(255,255,255,0.25)',
+          'circle-stroke-opacity': ['get', '_opacity', ['literal', {}], 1],
         },
       })
 
@@ -248,7 +286,7 @@ function App() {
         source: 'arcs',
         paint: {
           'line-color': ['get', '_color'],
-          'line-opacity': 0.4,
+          'line-opacity': ['*', ['get', '_opacity', ['literal', {}], 1], 0.4],
           'line-width': 1.5,
           'line-dasharray': [2, 2],
         },
@@ -386,19 +424,106 @@ function App() {
     }
   }, [])
 
-  // Update data when layer changes
-  useEffect(() => {
+  // Smooth layer transition logic
+  const animateLayerTransition = useCallback(async (newPointsData, newArcsData, layer) => {
     const map = mapRef.current
     if (!map || !mapReady) return
 
     const pointsSrc = map.getSource('points')
     const arcsSrc = map.getSource('arcs')
+    
+    // Phase 1: Fade out current data
+    setLayerTransitioning(true)
+    
+    // Fade out animation (300ms)
+    const fadeOutSteps = 10
+    const fadeOutDelay = 25
+    
+    for (let i = fadeOutSteps; i >= 0; i--) {
+      const opacity = i / fadeOutSteps
+      
+      // Update current data with fading opacity (using previous layer data)
+      if (pointsSrc) {
+        const prevPointsData = pointsData
+        const fadingData = buildPointsGeoJSON(prevPointsData, activeLayer, opacity)
+        pointsSrc.setData(fadingData)
+      }
+      
+      if (arcsSrc) {
+        const prevArcsData = arcsData
+        const fadingData = buildArcsGeoJSON(prevArcsData, activeLayer, opacity)
+        arcsSrc.setData(fadingData)
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, fadeOutDelay))
+    }
+    
+    // Phase 2: Update with new data (invisible)
+    if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(newPointsData, layer, 0))
+    if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(newArcsData, layer, 0))
+    
+    // Brief pause
+    await new Promise(resolve => setTimeout(resolve, 100))
+    
+    // Phase 3: Staggered fade-in animation for points
+    const totalPoints = newPointsData.length
+    const staggerDelay = Math.min(50, Math.max(15, 2000 / totalPoints)) // Between 15-50ms, max 2 seconds total
+    
+    // Animate points in staggered fashion
+    for (let pointIndex = 0; pointIndex <= totalPoints; pointIndex++) {
+      if (pointsSrc) {
+        const staggeredData = buildPointsGeoJSON(newPointsData, layer, 1)
+        staggeredData.features = staggeredData.features.map((feature, index) => ({
+          ...feature,
+          properties: {
+            ...feature.properties,
+            _opacity: index < pointIndex ? 1 : 0
+          }
+        }))
+        pointsSrc.setData(staggeredData)
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, staggerDelay))
+    }
+    
+    // Phase 4: Fade in arcs after points
+    const fadeInSteps = 8
+    const fadeInStepDelay = 25
+    
+    for (let i = 0; i <= fadeInSteps; i++) {
+      const opacity = i / fadeInSteps
+      if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(newArcsData, layer, opacity))
+      await new Promise(resolve => setTimeout(resolve, fadeInStepDelay))
+    }
+    
+    // Clear selected ring
     const ringSrc = map.getSource('selected-ring')
-
-    if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(pointsData, activeLayer))
-    if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(arcsData, activeLayer))
     if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
-  }, [pointsData, arcsData, activeLayer, mapReady])
+    
+    setLayerTransitioning(false)
+  }, [mapReady, pointsData, arcsData, activeLayer])
+
+  // Update data when layer changes
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !mapReady) return
+
+    if (initialLoad) {
+      // Initial load - no animation, just set the data
+      const pointsSrc = map.getSource('points')
+      const arcsSrc = map.getSource('arcs')
+      const ringSrc = map.getSource('selected-ring')
+
+      if (pointsSrc) pointsSrc.setData(buildPointsGeoJSON(pointsData, activeLayer))
+      if (arcsSrc) arcsSrc.setData(buildArcsGeoJSON(arcsData, activeLayer))
+      if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
+      
+      setInitialLoad(false)
+    } else {
+      // Use smooth transitions for subsequent layer changes
+      animateLayerTransition(pointsData, arcsData, activeLayer)
+    }
+  }, [pointsData, arcsData, activeLayer, mapReady, animateLayerTransition, initialLoad])
 
   // Traveling light animation
   useEffect(() => {
@@ -505,8 +630,12 @@ function App() {
   // Layer change handler
   const handleLayerChange = useCallback(
     (layer) => {
+      // Prevent layer changes during transitions
+      if (layerTransitioning) return
+      
       setActiveLayer(layer)
       setSelected(null)
+      setTimeRange(null) // Reset timeline filter
       hasZoomedRef.current = false
 
       if (popupRef.current) {
@@ -525,7 +654,7 @@ function App() {
         })
       }
     },
-    [],
+    [layerTransitioning],
   )
 
   const handleClosePanel = useCallback(() => {
@@ -535,6 +664,46 @@ function App() {
     if (ringSrc) ringSrc.setData({ type: 'FeatureCollection', features: [] })
   }, [])
 
+  // Handle location selection from search
+  const handleLocationSelect = useCallback((location) => {
+    const map = mapRef.current
+    if (!map) return
+
+    setSelected(location)
+
+    // Update selected ring
+    const ringSrc = map.getSource('selected-ring')
+    if (ringSrc) {
+      ringSrc.setData({
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [location.lng, location.lat] },
+            properties: { _color: getPointColor(location, activeLayer) },
+          },
+        ],
+      })
+    }
+
+    // Fly to location
+    map.flyTo({
+      center: [location.lng, location.lat],
+      zoom: SELECTED_ZOOM,
+      duration: 1200,
+      essential: true,
+    })
+
+    // Pause rotation
+    userInteractingRef.current = true
+    clearTimeout(resumeTimeoutRef.current)
+    resumeTimeoutRef.current = setTimeout(() => {
+      userInteractingRef.current = false
+    }, 8000)
+  }, [activeLayer])
+
+  // Timeline handler already defined above
+
   return (
     <div className="app">
       <header className="header">
@@ -542,16 +711,37 @@ function App() {
         <p className="subtitle">{SUBTITLES[activeLayer]}</p>
       </header>
 
-      <LayerToggle activeLayer={activeLayer} onLayerChange={handleLayerChange} />
+      <Search
+        pointsData={basePointsData}
+        activeLayer={activeLayer}
+        onLocationSelect={handleLocationSelect}
+        onLayerChange={handleLayerChange}
+        transitioning={layerTransitioning}
+      />
+
+      <LayerToggle 
+        activeLayer={activeLayer} 
+        onLayerChange={handleLayerChange}
+        transitioning={layerTransitioning}
+      />
 
       <div className="globe-container" ref={mapContainer} />
 
       <InfoPanel location={selected} layer={activeLayer} onClose={handleClosePanel} />
 
+      <Timeline
+        activeLayer={activeLayer}
+        pointsData={basePointsData}
+        onTimeRangeChange={handleTimeRangeChange}
+        transitioning={layerTransitioning}
+      />
+
       <footer className="footer">
         <p className="hint">
           {selected
             ? 'Click another point or drag to explore'
+            : timeRange && pointsData.length < basePointsData.length
+            ? `Showing ${pointsData.length} of ${basePointsData.length} points • Drag timeline to adjust`
             : 'Click a point to learn more \u00b7 Drag to explore'}
         </p>
       </footer>
